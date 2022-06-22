@@ -53,14 +53,20 @@ namespace Captura.SharpAvi
         public int SamplesPerSecond => _provider.WaveFormat.SampleRate;
 
         public int EncodeBlock(byte[] Source, int SourceOffset, int SourceCount, byte[] Destination, int DestinationOffset)
-        {
-            Array.Copy(Source, SourceOffset, Destination, DestinationOffset, SourceCount);
+            => EncodeBlock(Source.AsSpan(SourceOffset, SourceCount), Destination.AsSpan(DestinationOffset));
 
-            return SourceCount;
-        }
-
-        public int Flush(byte[] Destination, int DestinationOffset) => 0;
+        public int Flush(byte[] Destination, int DestinationOffset)
+            => Flush(Destination.AsSpan(DestinationOffset));
 
         public int GetMaxEncodedLength(int SourceCount) => SourceCount;
+
+        public int EncodeBlock(ReadOnlySpan<byte> source, Span<byte> destination)
+        {
+            source.CopyTo(destination);
+
+            return source.Length;
+        }
+
+        public int Flush(Span<byte> destination) => 0;
     }
 }
