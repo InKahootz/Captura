@@ -87,9 +87,9 @@
                                       SelectedColor="{Binding RegionSelectorViewModel.BrushColor.Value, Mode=TwoWay, Source={StaticResource ServiceLocator}}"
                                       VerticalAlignment="Center"
                                       ColorMode="ColorCanvas"
-                                      ShowAdvancedButton="True"
-                                      AdvancedButtonHeader="Color Canvas"
-                                      StandardButtonHeader="Pallette"
+                                      ShowTabHeaders="True"
+                                      AdvancedTabHeader="Color Canvas"
+                                      StandardTabHeader="Pallette"
                                       Width="50"
                                       ShowRecentColors="True"/>
 

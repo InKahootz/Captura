@@ -3,9 +3,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Captura</RootNamespace>
     <AssemblyName>captura</AssemblyName>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ApplicationIcon>Images\Captura.ico</ApplicationIcon>
@@ -16,10 +17,6 @@
     <Resource Include="Images\record.ico" />
     <Resource Include="Images\Captura.ico" />
     <Resource Include="Images\pause.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Management" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Captura.Base\Captura.Base.csproj" />
@@ -35,11 +32,12 @@
     <ProjectReference Include="..\Screna\Screna.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.2.1" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.0.0" />
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="ModernUI.WPF" Version="1.0.9" />
-    <PackageReference Include="SamOatesGames.ModernUI.Xceed.Toolkit" Version="1.0.0" />
+    <PackageReference Include="SamOatesGames.ModernUI.Xceed.Toolkit" Version="1.0.1905191936" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>
   <Target Name="Delete unused libs" AfterTargets="Build">
     <ItemGroup>

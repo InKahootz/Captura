@@ -1,4 +1,6 @@
 ﻿using MediaFoundation.Transform;
+
+using SharpDX;
 using SharpDX.Direct3D11;
 using SharpDX.DXGI;
 using SharpDX.MediaFoundation;
@@ -15,7 +17,7 @@ namespace Captura.Windows.MediaFoundation
 
         public MfColorConverter(int Width, int Height, Device Device)
         {
-            var transforms = MediaFactory.FindTransform(TransformCategoryGuids.VideoProcessor, TransformEnumFlag.All);
+            var transforms = TransformMediaFactory.FindTransform(TransformCategoryGuids.VideoProcessor, TransformEnumFlag.All);
             _colorConverter = transforms[0].ActivateObject<Transform>();
 
             _deviceMan = new DXGIDeviceManager();
@@ -119,5 +121,59 @@ namespace Captura.Windows.MediaFoundation
 
             _deviceMan.Dispose();
         }
+    }
+
+    public static class TransformMediaFactory
+    {
+        public static Activate[] FindTransform(Guid guidCategory, TransformEnumFlag enumFlags, TRegisterTypeInformation? inputTypeRef = null, TRegisterTypeInformation? outputTypeRef = null)
+        {
+            IntPtr pActivatesArr;
+            int pNumActivates;
+            TEnumEx(guidCategory, (int)enumFlags, inputTypeRef, outputTypeRef, out pActivatesArr, out pNumActivates);
+
+            var activates = new Activate[pNumActivates];
+            unsafe
+            {
+                var ptr = (IntPtr*)(pActivatesArr);
+                for (int i = 0; i < pNumActivates; i++)
+                {
+                    activates[i] = new Activate(ptr[i]);
+                }
+            }
+            Marshal.FreeCoTaskMem(pActivatesArr);
+
+            return activates;
+        }
+
+        internal unsafe static void TEnumEx(Guid guidCategory, int flags, TRegisterTypeInformation? inputTypeRef, TRegisterTypeInformation? outputTypeRef, out IntPtr pMFTActivateOut, out int numMFTActivateRef)
+        {
+            TRegisterTypeInformation value = default(TRegisterTypeInformation);
+            if (inputTypeRef.HasValue)
+            {
+                value = inputTypeRef.Value;
+            }
+
+            TRegisterTypeInformation value2 = default(TRegisterTypeInformation);
+            if (outputTypeRef.HasValue)
+            {
+                value2 = outputTypeRef.Value;
+            }
+
+            Result result;
+            fixed (int* ptr = &numMFTActivateRef)
+            {
+                void* param = ptr;
+                fixed (IntPtr* ptr2 = &pMFTActivateOut)
+                {
+                    void* param2 = ptr2;
+                    result = MFTEnumEx_(guidCategory, flags, (!inputTypeRef.HasValue) ? null : (&value), (!outputTypeRef.HasValue) ? null : (&value2), param2, param);
+                }
+            }
+
+            result.CheckError();
+        }
+
+        [DllImport("Mfplat.dll", CallingConvention = CallingConvention.StdCall, EntryPoint = "MFTEnumEx")]
+        private unsafe static extern int MFTEnumEx_(Guid param0, int param1, void* param2, void* param3, void* param4, void* param5);
     }
 }
