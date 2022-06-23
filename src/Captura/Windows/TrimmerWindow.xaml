@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:captura="clr-namespace:Captura"
         mc:Ignorable="d"
         Title="Trim"
@@ -26,13 +26,11 @@
                    Content="{Binding To, Converter={StaticResource IntegralTimeSpanConverter}}"/>
         </DockPanel>
 
-        <xctk:RangeSlider Maximum="{Binding End, Converter={StaticResource TimeSpanToSecondsConverter}}"
+        <mah:RangeSlider Maximum="{Binding End, Converter={StaticResource TimeSpanToSecondsConverter}}"
                           LowerValue="{Binding From, Converter={StaticResource TimeSpanToSecondsConverter}}"
-                          HigherValue="{Binding To, Converter={StaticResource TimeSpanToSecondsConverter}}"
+                          UpperValue="{Binding To, Converter={StaticResource TimeSpanToSecondsConverter}}"
                           Background="LightGray"
-                          LowerRangeBackground="LightGray"
-                          HigherRangeBackground="LightGray"
-                          RangeBackground="#77FFC7"
+
                           DockPanel.Dock="Bottom"
                           Margin="10,20"/>
 

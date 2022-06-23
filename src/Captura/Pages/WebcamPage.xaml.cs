@@ -10,7 +10,6 @@ using Captura.Webcam;
 using Captura.Windows.Gdi;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using Xceed.Wpf.Toolkit.Core.Utilities;
 
 namespace Captura
 {
