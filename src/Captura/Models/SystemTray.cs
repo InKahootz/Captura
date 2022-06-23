@@ -5,7 +5,6 @@ using Captura.Audio;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class SystemTray : ISystemTray, IDisposable
     {
         bool _first = true;

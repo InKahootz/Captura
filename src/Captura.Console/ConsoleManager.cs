@@ -18,7 +18,6 @@ using static System.Console;
 
 namespace Captura
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class ConsoleManager : IDisposable
     {
         readonly Settings _settings;

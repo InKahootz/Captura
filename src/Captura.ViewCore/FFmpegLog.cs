@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 
 namespace Captura.FFmpeg
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FFmpegLog : NotifyPropertyChanged, IFFmpegLogRepository
     {
         public FFmpegLog()

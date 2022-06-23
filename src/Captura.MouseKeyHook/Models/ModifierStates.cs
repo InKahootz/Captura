@@ -4,7 +4,6 @@ using System.Windows.Input;
 
 namespace Captura.MouseKeyHook
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class ModifierStates
     {
         public static ModifierStates GetCurrent()

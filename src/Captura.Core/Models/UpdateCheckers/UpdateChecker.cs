@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class UpdateChecker : IUpdateChecker
     {
         readonly ProxySettings _proxySettings;

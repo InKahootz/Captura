@@ -5,7 +5,6 @@ using Reactive.Bindings;
 
 namespace Captura.Webcam
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class WebcamOverlay : ImageOverlay
     {
         WebcamModel _webcamModel;

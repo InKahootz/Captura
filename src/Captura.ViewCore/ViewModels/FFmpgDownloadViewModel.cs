@@ -11,7 +11,6 @@ using Reactive.Bindings;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FFmpegDownloadViewModel : NotifyPropertyChanged
     {
         public ICommand StartCommand { get; }

@@ -13,7 +13,6 @@ using Reactive.Bindings.Extensions;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class MainViewModel : ViewModelBase, IDisposable
     {
         bool _persist;

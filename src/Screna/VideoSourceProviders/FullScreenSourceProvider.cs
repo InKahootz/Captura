@@ -2,7 +2,6 @@ using Captura.Loc;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FullScreenSourceProvider : VideoSourceProviderBase
     {
         public FullScreenSourceProvider(ILocalizationProvider Loc,

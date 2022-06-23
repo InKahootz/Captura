@@ -1,6 +1,5 @@
 ﻿namespace Captura.Audio
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class WaveItem : IAudioWriterItem
     {
         public string Name { get; } = "Wave";

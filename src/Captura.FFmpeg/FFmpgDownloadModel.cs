@@ -7,7 +7,6 @@ using Captura.Loc;
 
 namespace Captura.FFmpeg
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FFmpegDownloadModel : NotifyPropertyChanged
     {
         readonly ProxySettings _proxySettings;

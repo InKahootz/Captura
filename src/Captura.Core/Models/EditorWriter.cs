@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class EditorWriter : NotifyPropertyChanged, IImageWriterItem
     {
         public Task Save(IBitmapImage Image, ImageFormats Format, string FileName)

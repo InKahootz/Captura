@@ -2,7 +2,6 @@
 
 namespace Captura.Fakes
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class FakeWindowProvider : IMainWindow
     {
         public bool IsVisible

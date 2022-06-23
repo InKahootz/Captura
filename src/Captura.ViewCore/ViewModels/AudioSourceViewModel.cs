@@ -21,8 +21,7 @@ namespace Captura.Models
 
         public ReadOnlyObservableCollection<IAudioItem> AvailableSpeakers { get; }
 
-        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        readonly IObservable<Unit> _refreshObservable;
+            readonly IObservable<Unit> _refreshObservable;
 
         public AudioSourceViewModel(IAudioSource AudioSource)
         {

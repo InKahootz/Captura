@@ -4,7 +4,6 @@ using Captura.Models;
 
 namespace Captura.Fakes
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class FakeSystemTray : ISystemTray
     {
         readonly ILocalizationProvider _loc;
@@ -18,8 +17,7 @@ namespace Captura.Fakes
 
         public void ShowScreenShotNotification(string FilePath)
         {
-            // ReSharper disable once LocalizableElement
-            Console.WriteLine($"{_loc.ScreenShotSaved}: {FilePath}");
+                    Console.WriteLine($"{_loc.ScreenShotSaved}: {FilePath}");
         }
 
         public void ShowNotification(INotification Notification) { }

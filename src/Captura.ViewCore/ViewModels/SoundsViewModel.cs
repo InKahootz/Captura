@@ -5,7 +5,6 @@ using Captura.Models;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class SoundsViewModel : NotifyPropertyChanged
     {
         public IReadOnlyCollection<SoundsViewModelItem> Items { get; }

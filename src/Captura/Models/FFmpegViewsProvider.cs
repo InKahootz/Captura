@@ -7,7 +7,6 @@ using FirstFloor.ModernUI.Windows.Controls;
 
 namespace Captura.FFmpeg
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FFmpegViewsProvider : IFFmpegViewsProvider
     {
         readonly ILocalizationProvider _loc;

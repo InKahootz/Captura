@@ -6,10 +6,8 @@ namespace Captura.Models
 {
     public static class SingleInstanceManager
     {
-        // ReSharper disable once NotAccessedField.Local
-        static Mutex _mutex;
-        // ReSharper disable once NotAccessedField.Local
-        static Task _task;
+            static Mutex _mutex;
+            static Task _task;
 
         // Mutex allows us to know whether another instance is already open
         const string MutexId = "captura-mutex-304bae7c-e520-4bfe-a308-c99476062091";

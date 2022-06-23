@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace Captura.Native
 {
     [Serializable, StructLayout(LayoutKind.Sequential)]
-    // ReSharper disable once InconsistentNaming
     struct RECT
     {
         public int Left;

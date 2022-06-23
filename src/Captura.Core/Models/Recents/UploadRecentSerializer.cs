@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class UploadRecentSerializer : IRecentItemSerializer
     {
         readonly IEnumerable<IImageUploader> _imgUploaders;

@@ -3,7 +3,6 @@ using Captura.Models;
 
 namespace Captura.Hotkeys
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class HotkeySetup
     {
         readonly HotKeyManager _hotKeyManager;

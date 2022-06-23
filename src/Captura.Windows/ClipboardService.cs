@@ -8,7 +8,6 @@ using Captura.Windows.Gdi;
 
 namespace Captura.Windows
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class ClipboardService : IClipboardService
     {
         readonly IMessageProvider _messageProvider;

@@ -7,7 +7,6 @@ using Reactive.Bindings;
 
 namespace Captura.Webcam
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class WebcamModel : NotifyPropertyChanged
     {
         readonly IWebCamProvider _webcamProvider;

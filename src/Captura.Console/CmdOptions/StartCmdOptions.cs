@@ -8,7 +8,6 @@ using CommandLine.Text;
 
 namespace Captura
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     [Verb("start", HelpText = "Start Recording")]
     class StartCmdOptions : CommonCmdOptions, ICmdlineVerb
     {

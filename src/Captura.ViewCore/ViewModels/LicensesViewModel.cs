@@ -4,7 +4,6 @@ using Captura.Models;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class LicensesViewModel : NotifyPropertyChanged
     {
         public LicensesViewModel()

@@ -5,7 +5,6 @@ using NAudio.CoreAudioApi;
 
 namespace Captura.Audio
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class NAudioSource : IAudioSource
     {
         MMDeviceEnumerator _deviceEnumerator = new MMDeviceEnumerator();

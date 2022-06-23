@@ -6,7 +6,6 @@ using Reactive.Bindings;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class RecentViewModel : ViewModelBase
     {
         public ReadOnlyObservableCollection<IRecentItem> Items { get; }

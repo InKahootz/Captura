@@ -122,8 +122,7 @@ namespace Captura
         {
             Binder.BindSingleton<TClass>();
 
-            // ReSharper disable once ConvertClosureToMethodGroup
-            Binder.Bind<TInterface>(() => Get<TClass>());
+                    Binder.Bind<TInterface>(() => Get<TClass>());
         }
     }
 }

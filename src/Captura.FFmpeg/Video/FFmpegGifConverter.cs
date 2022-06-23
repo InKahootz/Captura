@@ -4,7 +4,6 @@ using Captura.Video;
 
 namespace Captura.FFmpeg
 {
-    // ReSharper disable once InconsistentNaming
     class FFmpegGifConverter : IVideoConverter
     {
         public string Name => "Gif (FFmpeg)";

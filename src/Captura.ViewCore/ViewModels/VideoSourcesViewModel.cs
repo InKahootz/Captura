@@ -3,7 +3,6 @@ using Captura.Video;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class VideoSourcesViewModel : NotifyPropertyChanged
     {
         readonly FullScreenSourceProvider _fullScreenProvider;

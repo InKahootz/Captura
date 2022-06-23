@@ -5,7 +5,6 @@ using Captura.Video;
 
 namespace Captura.Tests
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class TestManagerFixture : IDisposable
     {
         public TestManagerFixture()

@@ -6,7 +6,6 @@ using Captura.Video;
 
 namespace Captura.FFmpeg
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class StreamingWriterProvider : IVideoWriterProvider
     {
         public string Name => "Stream";

@@ -5,7 +5,6 @@ using Captura.Models;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FileNameFormatViewModel : ViewModelBase
     {
         public FileNameFormatViewModel(Settings Settings, ILocalizationProvider Loc)

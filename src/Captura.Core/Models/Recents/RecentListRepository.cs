@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class RecentListRepository : IRecentList
     {
         readonly ObservableCollection<IRecentItem> _recentList = new ObservableCollection<IRecentItem>();

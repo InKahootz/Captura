@@ -4,7 +4,6 @@ using Captura.Windows.Gdi;
 
 namespace Captura.Webcam
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class WebcamSourceProvider : NotifyPropertyChanged, IVideoSourceProvider
     {
         readonly ILocalizationProvider _loc;

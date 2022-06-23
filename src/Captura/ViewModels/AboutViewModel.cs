@@ -6,7 +6,6 @@ using Reactive.Bindings;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class AboutViewModel : ViewModelBase
     {
         public ICommand HyperlinkCommand { get; }
