@@ -1,22 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>Captura</RootNamespace>
     <AssemblyName>captura-cli</AssemblyName>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Prefer32Bit>false</Prefer32Bit>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>captura cli</Title>
+    <Description>Captures Screen/Window as ScreenShot/ScreenCast along with Audio from Microphone/Loopback, Mouse Cursor, Clicks and Keystrokes</Description>
+  </PropertyGroup>
+
   <PropertyGroup>
     <ApplicationIcon>..\Captura\Images\Captura.ico</ApplicationIcon>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Captura.Base\Captura.Base.csproj" />
     <ProjectReference Include="..\Captura.Core\Captura.Core.csproj" />

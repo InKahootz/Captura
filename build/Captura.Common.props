@@ -1,0 +1,16 @@
+<Project>
+  
+  <PropertyGroup>
+    <Company>Mathew Sachin</Company>
+    <Authors>Mathew Sachin</Authors>
+    <Product>Captura</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>(c) Mathew Sachin</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

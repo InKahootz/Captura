@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <RepositoryDirectory>$(MSBuildThisFileDirectory)</RepositoryDirectory>
+    <BuildToolsDirectory>$(RepositoryDirectory)build\</BuildToolsDirectory>
+  </PropertyGroup>
+
+  <Import Project="$(BuildToolsDirectory)Captura.Common.props" />
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107" PrivateAssets="All" />
+  </ItemGroup>
+</Project>
