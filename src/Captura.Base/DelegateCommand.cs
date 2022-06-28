@@ -33,6 +33,6 @@ namespace Captura
             _syncContext.Run(() => CanExecuteChanged?.Invoke(this, EventArgs.Empty));
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
     }
 }

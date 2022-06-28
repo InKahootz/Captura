@@ -32,6 +32,6 @@ namespace Captura.Audio
         {
         }
 
-        public event Action DevicesUpdated;
+        public event Action? DevicesUpdated;
     }
 }

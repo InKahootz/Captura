@@ -8,7 +8,7 @@ namespace Captura.FFmpeg
     {
         public string FolderPath
         {
-            get => Get<string>();
+            get => Get<string>("");
             set => Set(value);
         }
 

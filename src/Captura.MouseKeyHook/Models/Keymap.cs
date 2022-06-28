@@ -7,7 +7,7 @@ namespace Captura.MouseKeyHook
 {
     public class Keymap
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public List<MappingGroup> Mappings { get; } = new List<MappingGroup>();
     }

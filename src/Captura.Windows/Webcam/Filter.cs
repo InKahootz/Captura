@@ -27,19 +27,19 @@ namespace Captura.Webcam
         /// <summary> Retrieve the a moniker's display name (i.e. it's unique string) </summary>
         static string GetMonikerString(IMoniker Moniker)
         {
-            Moniker.GetDisplayName(null, null, out var s);
+            Moniker.GetDisplayName(null!, null, out var s);
             return s;
         }
 
         /// <summary> Retrieve the human-readable name of the filter </summary>
         static string GetName(IMoniker Moniker)
         {
-            object bagObj = null;
+            object? bagObj = null;
 
             try
             {
                 var bagId = typeof(IPropertyBag).GUID;
-                Moniker.BindToStorage(null, null, ref bagId, out bagObj);
+                Moniker.BindToStorage(null!, null, ref bagId, out bagObj);
                 var bag = (IPropertyBag)bagObj;
                 var hr = bag.Read("FriendlyName", out var val, null);
 
@@ -66,7 +66,7 @@ namespace Captura.Webcam
         /// <summary>
         ///  Compares the current instance with another object of the same type.
         /// </summary>
-        public int CompareTo(object Obj)
+        public int CompareTo(object? Obj)
         {
             if (Obj == null)
                 return 1;
@@ -80,8 +80,8 @@ namespace Captura.Webcam
         {
             get
             {
-                object comObj = null;
-                IEnumMoniker enumMon = null;
+                object? comObj = null;
+                IEnumMoniker? enumMon = null;
                 var mon = new IMoniker[1];
 
                 try
@@ -111,15 +111,12 @@ namespace Captura.Webcam
 
                         // Release resources
                         Marshal.ReleaseComObject(mon[0]);
-                        mon[0] = null;
                     } while (true);
                 }
                 finally
                 {
                     if (mon[0] != null)
                         Marshal.ReleaseComObject(mon[0]);
-
-                    mon[0] = null;
 
                     if (enumMon != null)
                         Marshal.ReleaseComObject(enumMon);

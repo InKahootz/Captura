@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Input;
 using Captura.Audio;
 using Captura.Models;
@@ -28,11 +29,16 @@ namespace Captura.ViewModels
                 });
         }
 
-        public string FileName
+        public string? FileName
         {
             get => _settings.Items.TryGetValue(SoundKind, out var value) ? value : null;
             set
             {
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
                 if (_settings.Items.ContainsKey(SoundKind))
                 {
                     _settings.Items[SoundKind] = value;

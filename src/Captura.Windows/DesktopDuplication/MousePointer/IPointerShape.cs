@@ -9,6 +9,6 @@ namespace Captura.Windows.DesktopDuplication
     {
         void Update(Texture2D DesktopTexture, OutputDuplicatePointerPosition PointerPosition);
 
-        Bitmap GetBitmap();
+        Bitmap? GetBitmap();
     }
 }

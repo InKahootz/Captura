@@ -6,7 +6,7 @@ namespace Captura.Windows
 {
     class DialogService : IDialogService
     {
-        public string PickFolder(string Current, string Description)
+        public string? PickFolder(string? Current, string Description)
         {
             using (var dlg = new VistaFolderBrowserDialog
             {
@@ -22,13 +22,13 @@ namespace Captura.Windows
             return null;
         }
 
-        public string PickFile(string InitialFolder, string Description)
+        public string? PickFile(string? InitialFolder, string Description)
         {
             var ofd = new OpenFileDialog
             {
                 CheckFileExists = true,
                 CheckPathExists = true,
-                InitialDirectory = InitialFolder,
+                InitialDirectory = InitialFolder ?? "",
                 Title = Description
             };
 

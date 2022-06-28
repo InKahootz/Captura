@@ -27,7 +27,7 @@ namespace Captura.Windows.MediaFoundation
 
         public override string ToString() => Name;
 
-        public IVideoWriterItem ParseCli(string Cli)
+        public IVideoWriterItem? ParseCli(string Cli)
         {
             return Cli == "mf" ? this.First() : null;
         }

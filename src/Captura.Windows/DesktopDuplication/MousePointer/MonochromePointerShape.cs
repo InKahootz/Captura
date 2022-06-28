@@ -61,7 +61,6 @@ namespace Captura.Windows.DesktopDuplication
 
         protected override void OnDispose()
         {
-            _andMaskBuffer = _xorMaskBuffer = null;
         }
     }
 }

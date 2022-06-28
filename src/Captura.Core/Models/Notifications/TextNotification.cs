@@ -5,9 +5,9 @@ namespace Captura
 {
     public class TextNotification : INotification
     {
-        readonly Action _onClick;
+        readonly Action? _onClick;
 
-        public TextNotification(string PrimaryText, Action OnClick = null, string SecondaryText = null)
+        public TextNotification(string PrimaryText, Action? OnClick = null, string? SecondaryText = null)
         {
             _onClick = OnClick;
 
@@ -18,7 +18,7 @@ namespace Captura
         public int Progress => 0;
 
         public string PrimaryText { get; }
-        public string SecondaryText { get; }
+        public string? SecondaryText { get; }
 
         bool INotification.Finished => true;
 
@@ -28,6 +28,6 @@ namespace Captura
 
         public void Remove() => RemoveRequested?.Invoke();
 
-        public event Action RemoveRequested;
+        public event Action? RemoveRequested;
     }
 }

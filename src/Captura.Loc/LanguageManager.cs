@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Newtonsoft.Json.Linq;
@@ -9,8 +10,8 @@ namespace Captura.Loc
     public class LanguageManager : LanguageFields
     {
         readonly JObject _defaultLanguage;
-        JObject _currentLanguage;
-        readonly string _langDir;
+        JObject? _currentLanguage;
+        readonly string? _langDir;
         
         public static LanguageManager Instance { get; } = new LanguageManager();
 
@@ -67,6 +68,7 @@ namespace Captura.Loc
         public CultureInfo CurrentCulture
         {
             get => _currentCulture;
+            [MemberNotNull(nameof(_currentCulture))]
             set
             {
                 _currentCulture = value;
@@ -81,7 +83,7 @@ namespace Captura.Loc
             }
         }
 
-        public override event Action<CultureInfo> LanguageChanged;
+        public override event Action<CultureInfo>? LanguageChanged;
 
         JObject LoadLang(string LanguageId)
         {
@@ -97,7 +99,7 @@ namespace Captura.Loc
             }
         }
 
-        public string this[string Key]
+        public string this[string? Key]
         {
             get
             {
@@ -120,6 +122,6 @@ namespace Captura.Loc
             }
         }
 
-        protected override string GetValue(string PropertyName) => this[PropertyName];
+        protected override string GetValue(string? PropertyName) => this[PropertyName];
     }
 }

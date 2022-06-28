@@ -23,7 +23,7 @@ namespace Captura.FFmpeg
 
         public override string ToString() => Name;
 
-        public IVideoWriterItem ParseCli(string Cli)
+        public IVideoWriterItem? ParseCli(string Cli)
         {
             var ffmpegExists = FFmpegService.FFmpegExists;
 

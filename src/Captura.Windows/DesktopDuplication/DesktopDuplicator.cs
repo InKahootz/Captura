@@ -10,7 +10,7 @@ namespace Captura.Windows.DesktopDuplication
     public class DesktopDuplicator : IDisposable
     {
         Direct2DEditorSession _editorSession;
-        DxMousePointer _mousePointer;
+        DxMousePointer? _mousePointer;
         DuplCapture _duplCapture;
 
         public DesktopDuplicator(bool IncludeCursor, Output1 Output, IPreviewWindow PreviewWindow)
@@ -56,16 +56,13 @@ namespace Captura.Windows.DesktopDuplication
         {
             try { _duplCapture.Dispose(); }
             catch { }
-            finally { _duplCapture = null; }
 
             // Mouse Pointer disposed later to prevent errors.
             try { _mousePointer?.Dispose(); }
             catch { }
-            finally { _mousePointer = null; }
 
             try { _editorSession.Dispose(); }
             catch { }
-            finally { _editorSession = null; }
         }
     }
 }

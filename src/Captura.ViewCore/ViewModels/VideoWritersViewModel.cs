@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System;
@@ -45,7 +45,7 @@ namespace Captura.ViewModels
 
             _videoWriters.Clear();
 
-            foreach (var writerItem in SelectedVideoWriterKind)
+            foreach (var writerItem in SelectedVideoWriterKind ?? Enumerable.Empty<IVideoWriterItem>())
             {
                 _videoWriters.Add(writerItem);
             }
@@ -62,9 +62,9 @@ namespace Captura.ViewModels
             }
         }
 
-        IVideoWriterProvider _writerKind;
+        IVideoWriterProvider? _writerKind;
 
-        public IVideoWriterProvider SelectedVideoWriterKind
+        public IVideoWriterProvider? SelectedVideoWriterKind
         {
             get => _writerKind;
             set
@@ -81,17 +81,17 @@ namespace Captura.ViewModels
             }
         }
 
-        IVideoWriterItem _writer;
+        IVideoWriterItem? _writer;
 
-        public IVideoWriterItem SelectedVideoWriter
+        public IVideoWriterItem? SelectedVideoWriter
         {
             get => _writer;
             set => Set(ref _writer, value ?? AvailableVideoWriters.FirstOrDefault());
         }
 
-        IVideoConverter _postWriter;
+        IVideoConverter? _postWriter;
 
-        public IVideoConverter SelectedPostWriter
+        public IVideoConverter? SelectedPostWriter
         {
             get => _postWriter;
             set => Set(ref _postWriter, value ?? AvailablePostWriters.FirstOrDefault());
@@ -99,9 +99,9 @@ namespace Captura.ViewModels
 
         public IReadOnlyList<IVideoWriterItem> AvailableStepWriters { get; }
 
-        IVideoWriterItem _stepsWriter;
+        IVideoWriterItem? _stepsWriter;
 
-        public IVideoWriterItem SelectedStepsWriter
+        public IVideoWriterItem? SelectedStepsWriter
         {
             get => _stepsWriter;
             set => Set(ref _stepsWriter, value ?? AvailableStepWriters[0]);

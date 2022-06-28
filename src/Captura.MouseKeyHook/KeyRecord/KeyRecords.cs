@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -26,11 +27,16 @@ namespace Captura.MouseKeyHook
             _records.Add(KeyRecord);
         }
         
-        public IKeyRecord Last
+        public IKeyRecord? Last
         {
             get => _records.Count == 0 ? null : _records [_records.Count - 1];
             set
             {
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
                 if (_records.Count == 0)
                     _records.Add(value);
                 else _records[_records.Count - 1] = value;

@@ -12,7 +12,7 @@ namespace Captura.Video
         /// <summary>
         /// Capture transparent Screenshot of a Window.
         /// </summary>
-        public static IBitmapImage CaptureTransparent(IWindow Window, bool IncludeCursor, IPlatformServices PlatformServices)
+        public static IBitmapImage? CaptureTransparent(IWindow Window, bool IncludeCursor, IPlatformServices PlatformServices)
         {
             if (Window == null)
                 throw new ArgumentNullException(nameof(Window));

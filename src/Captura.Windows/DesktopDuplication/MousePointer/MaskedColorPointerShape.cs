@@ -53,7 +53,6 @@ namespace Captura.Windows.DesktopDuplication
 
         protected override void OnDispose()
         {
-            _maskedShapeBuffer = null;
         }
     }
 }

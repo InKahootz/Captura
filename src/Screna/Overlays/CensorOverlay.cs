@@ -55,7 +55,7 @@ namespace Captura.Video
             }
         }
 
-        public void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null)
+        public void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null)
         {
             foreach (var overlaySetting in _overlaySettings)
             {

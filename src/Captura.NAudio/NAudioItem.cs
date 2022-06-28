@@ -10,7 +10,7 @@ namespace Captura.Audio
 
         public bool IsLoopback { get; }
 
-        AudioClient _audioClient;
+        AudioClient? _audioClient;
 
         public void StartListeningForPeakLevel()
         {

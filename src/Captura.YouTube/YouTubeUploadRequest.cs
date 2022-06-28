@@ -44,9 +44,9 @@ namespace Captura.YouTube
             return await _videoInsertRequest.ResumeAsync(CancellationToken);
         }
 
-        public event Action<long> BytesSent;
+        public event Action<long>? BytesSent;
 
-        public event Action<string> Uploaded;
+        public event Action<string>? Uploaded;
 
         public void Dispose()
         {

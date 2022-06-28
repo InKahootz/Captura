@@ -17,7 +17,7 @@ namespace Captura.Video
         /// </summary>
         /// <param name="G">A <see cref="Graphics"/> object to draw upon.</param>
         /// <param name="Transform">Point Transform Function.</param>
-        public static void Draw(Graphics G, Func<Point, Point> Transform = null)
+        public static void Draw(Graphics G, Func<Point, Point>? Transform = null)
         {
             var hIcon = GetIcon(Transform, out var location);
 
@@ -35,7 +35,7 @@ namespace Captura.Video
             catch (ArgumentException) { }
         }
 
-        public static void Draw(IntPtr DeviceContext, Func<Point, Point> Transform = null)
+        public static void Draw(IntPtr DeviceContext, Func<Point, Point>? Transform = null)
         {
             var hIcon = GetIcon(Transform, out var location);
 
@@ -56,7 +56,7 @@ namespace Captura.Video
             }
         }
 
-        static IntPtr GetIcon(Func<Point, Point> Transform, out Point Location)
+        static IntPtr GetIcon(Func<Point, Point>? Transform, out Point Location)
         {
             Location = Point.Empty;
 

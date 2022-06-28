@@ -7,9 +7,9 @@ namespace Captura.Hotkeys
 {
     public class Hotkey : NotifyPropertyChanged
     {
-        Service _service;
+        Service? _service;
 
-        public Service Service
+        public Service? Service
         {
             get => _service;
             set => Set(ref _service, value);

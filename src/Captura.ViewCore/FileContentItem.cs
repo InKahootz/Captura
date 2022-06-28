@@ -15,6 +15,6 @@ namespace Captura.Models
 
         public string Name { get; }
 
-        public string Content => File.Exists(FileName) ? File.ReadAllText(FileName) : null;
+        public string? Content => File.Exists(FileName) ? File.ReadAllText(FileName) : null;
     }
 }

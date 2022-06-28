@@ -8,6 +8,6 @@ namespace Captura.Video
 
         string Description { get; }
 
-        IVideoWriterItem ParseCli(string Cli);
+        IVideoWriterItem? ParseCli(string Cli);
     }
 }

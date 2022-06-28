@@ -19,7 +19,7 @@ namespace Captura.Webcam
             _webcamCapture = WebcamModel.InitCapture();
         }
 
-        public override void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null)
+        public override void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null)
         {
             // No Webcam
             if (_webcamModel.AvailableCams.Count < 1 || _webcamModel.SelectedCam is NoWebcamItem)
@@ -39,7 +39,7 @@ namespace Captura.Webcam
             Draw(Editor, GetImage(Editor), pos, size, _settings.Opacity);
         }
 
-        IBitmapImage GetImage(IEditableFrame Editor)
+        IBitmapImage? GetImage(IEditableFrame Editor)
         {
             return _webcamCapture.Value?.Capture(Editor);
         }

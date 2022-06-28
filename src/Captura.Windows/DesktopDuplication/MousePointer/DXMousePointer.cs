@@ -16,7 +16,7 @@ namespace Captura.Windows.DesktopDuplication
         int _ptrShapeBufferSize;
         OutputDuplicatePointerShapeInformation _ptrShapeInfo;
         OutputDuplicatePointerPosition _pointerPosition;
-        IPointerShape _pointerShape;
+        IPointerShape? _pointerShape;
 
         const int PtrShapeMonochrome = 1;
         const int PtrShapeColor = 2;

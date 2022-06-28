@@ -6,7 +6,7 @@ namespace Captura.Webcam
 {
     public interface IWebcamCapture : IDisposable
     {
-        IBitmapImage Capture(IBitmapLoader BitmapLoader);
+        IBitmapImage? Capture(IBitmapLoader BitmapLoader);
 
         int Width { get; }
 

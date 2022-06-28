@@ -22,11 +22,11 @@ namespace Captura.MouseKeyHook.Steps
         readonly KeymapViewModel _keymap;
         bool _modifierSingleDown;
 
-        IRecordStep _lastStep;
+        IRecordStep? _lastStep;
 
-        IObservable<IRecordStep> Observe(IMouseKeyHook Hook, CancellationToken CancellationToken, out IObservable<Unit> ShotObservable)
+        IObservable<IRecordStep?> Observe(IMouseKeyHook Hook, CancellationToken CancellationToken, out IObservable<Unit> ShotObservable)
         {
-            var subject = new Subject<IRecordStep>();
+            var subject = new Subject<IRecordStep?>();
             var shotSubject = new Subject<Unit>();
             ShotObservable = shotSubject;
 
@@ -165,12 +165,12 @@ namespace Captura.MouseKeyHook.Steps
             _recordTask = Task.Factory.StartNew(() => DoRecord(stepsObservable, shotObservable), TaskCreationOptions.LongRunning);
         }
 
-        void DoRecord(IObservable<IRecordStep> StepsObservable, IObservable<Unit> ShotObservable)
+        void DoRecord(IObservable<IRecordStep?> StepsObservable, IObservable<Unit> ShotObservable)
         {
             var frames = ShotObservable.Select(M => _imageProvider.Capture())
                 .Zip(StepsObservable, (Frame, Step) =>
                 {
-                    Step.Draw(Frame, _imageProvider.PointTransform);
+                    Step?.Draw(Frame, _imageProvider.PointTransform);
 
                     return Frame.GenerateFrame(TimeSpan.Zero);
                 });
@@ -185,7 +185,7 @@ namespace Captura.MouseKeyHook.Steps
 
         public void Stop() => _recording = false;
 
-        public event Action<Exception> ErrorOccurred;
+        public event Action<Exception>? ErrorOccurred;
 
         public void Dispose()
         {
@@ -197,10 +197,8 @@ namespace Captura.MouseKeyHook.Steps
             _recordTask.Wait();
 
             _videoWriter.Dispose();
-            _videoWriter = null;
 
             _imageProvider?.Dispose();
-            _imageProvider = null;
         }
     }
 }

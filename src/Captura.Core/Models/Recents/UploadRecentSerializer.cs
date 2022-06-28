@@ -34,7 +34,7 @@ namespace Captura.Models
             public string UploaderService { get; set; }
         }
 
-        public JObject Serialize(IRecentItem Item)
+        public JObject? Serialize(IRecentItem Item)
         {
             if (Item is UploadRecentItem item)
             {
@@ -49,7 +49,7 @@ namespace Captura.Models
             return null;
         }
 
-        public IRecentItem Deserialize(JObject Item)
+        public IRecentItem? Deserialize(JObject Item)
         {
             try
             {

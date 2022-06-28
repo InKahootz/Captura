@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Captura
@@ -7,7 +8,8 @@ namespace Captura
     {
         readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
 
-        protected T Get<T>(T Default = default, [CallerMemberName] string PropertyName = "")
+        [return: NotNullIfNotNull("Default")]
+        protected T? Get<T>(T? Default = default, [CallerMemberName] string PropertyName = "")
         {
             lock (_dictionary)
             {
@@ -21,6 +23,7 @@ namespace Captura
         }
 
         protected void Set<T>(T Value, [CallerMemberName] string PropertyName = "")
+            where T : notnull
         {
             lock (_dictionary)
             {

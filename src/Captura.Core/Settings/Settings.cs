@@ -138,7 +138,7 @@ namespace Captura
 
         public string OutPath
         {
-            get => Get<string>();
+            get => Get<string>("");
             set => Set(value);
         }
 
@@ -173,7 +173,7 @@ namespace Captura
             set => Set(value);
         }
 
-        public string GetFileName(string Extension, string FileName = null)
+        public string GetFileName(string Extension, string? FileName = null)
         {
             if (FileName != null)
                 return FileName;

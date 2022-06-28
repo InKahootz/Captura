@@ -1,4 +1,4 @@
-using Captura.Models;
+﻿using Captura.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ namespace Captura
     {
         public const string CapturaPathConstant = "%CAPTURA_PATH%";
 
-        static string _settingsDir;
+        static string? _settingsDir;
 
         public static string SettingsDir
         {
@@ -94,7 +94,7 @@ namespace Captura
 
         public static IMessageProvider MessageProvider => Get<IMessageProvider>();
 
-        public static Version AppVersion => Assembly.GetEntryAssembly()?.GetName().Version;
+        public static Version? AppVersion => Assembly.GetEntryAssembly()?.GetName().Version;
 
         public static string AppDir
         {

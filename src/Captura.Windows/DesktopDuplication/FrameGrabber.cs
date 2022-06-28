@@ -9,11 +9,11 @@ namespace Captura.Windows.DesktopDuplication
     {
         readonly OutputDuplication _deskDupl;
 
-        AcquireResult _acquireResult;
+        AcquireResult? _acquireResult;
         readonly object _acquireResultLock = new object(),
             _acquireTaskLock = new object();
 
-        Task _acquireTask;
+        Task? _acquireTask;
 
         public FrameGrabber(OutputDuplication DeskDupl)
         {
@@ -57,7 +57,7 @@ namespace Captura.Windows.DesktopDuplication
             });
         }
 
-        AcquireResult GetAcquireResult()
+        AcquireResult? GetAcquireResult()
         {
             lock (_acquireTaskLock)
             {
@@ -81,7 +81,7 @@ namespace Captura.Windows.DesktopDuplication
             }
         }
 
-        public AcquireResult Grab()
+        public AcquireResult? Grab()
         {
             return GetAcquireResult();
         }

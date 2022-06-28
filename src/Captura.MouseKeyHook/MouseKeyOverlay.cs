@@ -13,12 +13,12 @@ namespace Captura.MouseKeyHook
         #region Fields
         readonly IMouseKeyHook _hook;
         readonly KeystrokesSettings _keystrokesSettings;
-        readonly IOverlay _mouseClickOverlay,
+        readonly IOverlay? _mouseClickOverlay,
             _keyOverlay,
             _scrollOverlay;
 
         readonly KeymapViewModel _keymap;
-        readonly TextWriter _textWriter;
+        readonly TextWriter? _textWriter;
         #endregion
         
         /// <summary>
@@ -66,7 +66,7 @@ namespace Captura.MouseKeyHook
 
                 var record = new KeyRecord(E, _keymap);
 
-                _textWriter.WriteLine($"{Elapsed.Invoke()}: {record.Display}");
+                _textWriter?.WriteLine($"{Elapsed.Invoke()}: {record.Display}");
             };
 
             return textWriter;
@@ -75,7 +75,7 @@ namespace Captura.MouseKeyHook
         /// <summary>
         /// Draws overlay.
         /// </summary>
-        public void Draw(IEditableFrame Editor, Func<Point, Point> Transform = null)
+        public void Draw(IEditableFrame Editor, Func<Point, Point>? Transform = null)
         {
             _mouseClickOverlay?.Draw(Editor, Transform);
             _scrollOverlay?.Draw(Editor, Transform);

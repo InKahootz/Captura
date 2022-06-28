@@ -25,7 +25,7 @@ namespace Captura.SharpAvi
 
         public override string ToString() => Name;
 
-        public IVideoWriterItem ParseCli(string Cli)
+        public IVideoWriterItem? ParseCli(string Cli)
         {
             if (ServiceProvider.FileExists("SharpAvi.dll") && Regex.IsMatch(Cli, @"^sharpavi:\d+$"))
             {

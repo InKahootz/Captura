@@ -14,9 +14,9 @@ namespace Captura.ViewModels
         public ICommand CopyToClipboardCommand { get; }
         public ICommand RemoveCommand { get; }
 
-        readonly ObservableCollection<FileContentItem> _crashLogs;
+        readonly ObservableCollection<FileContentItem>? _crashLogs;
 
-        public ReadOnlyObservableCollection<FileContentItem> CrashLogs { get; }
+        public ReadOnlyObservableCollection<FileContentItem>? CrashLogs { get; }
 
         public CrashLogsViewModel()
         {
@@ -41,7 +41,7 @@ namespace Captura.ViewModels
                 .ObserveProperty(M => M.SelectedCrashLog)
                 .Select(M => M != null)
                 .ToReactiveCommand()
-                .WithSubscribe(() => SelectedCrashLog.Content.WriteToClipboard());
+                .WithSubscribe(() => SelectedCrashLog?.Content?.WriteToClipboard());
 
             RemoveCommand = this
                 .ObserveProperty(M => M.SelectedCrashLog)
@@ -60,14 +60,14 @@ namespace Captura.ViewModels
                 File.Delete(SelectedCrashLog.FileName);
             }
 
-            _crashLogs.Remove(SelectedCrashLog);
+            _crashLogs?.Remove(SelectedCrashLog);
 
-            SelectedCrashLog = CrashLogs.Count > 0 ? CrashLogs[0] : null;
+            SelectedCrashLog = CrashLogs?.Count > 0 ? CrashLogs[0] : null;
         }
 
-        FileContentItem _selectedCrashLog;
+        FileContentItem? _selectedCrashLog;
 
-        public FileContentItem SelectedCrashLog
+        public FileContentItem? SelectedCrashLog
         {
             get => _selectedCrashLog;
             set => Set(ref _selectedCrashLog, value);

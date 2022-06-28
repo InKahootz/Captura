@@ -16,7 +16,7 @@ namespace Captura.Video
     public class Recorder : IRecorder
     {
         #region Fields
-        IAudioProvider _audioProvider;
+        IAudioProvider? _audioProvider;
         IVideoFileWriter _videoWriter;
         IImageProvider _imageProvider;
 
@@ -32,15 +32,15 @@ namespace Captura.Video
 
         readonly object _syncLock = new object();
 
-        Task<bool> _frameWriteTask;
-        Task _audioWriteTask;
+        Task<bool>? _frameWriteTask;
+        Task? _audioWriteTask;
         int _frameCount;
         long _audioBytesWritten;
         readonly int _audioBytesPerFrame, _audioChunkBytes;
         const int AudioChunkLengthMs = 200;
-        byte[] _audioBuffer, _silenceBuffer;
+        byte[]? _audioBuffer, _silenceBuffer;
 
-        readonly IFpsManager _fpsManager;
+        readonly IFpsManager? _fpsManager;
         #endregion
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace Captura.Video
         /// <param name="ImageProvider">The image source.</param>
         /// <param name="FrameRate">Video Frame Rate.</param>
         /// <param name="AudioProvider">The audio source. null = no audio.</param>
-        public Recorder(IVideoFileWriter VideoWriter, IImageProvider ImageProvider, int FrameRate,
-            IAudioProvider AudioProvider = null,
-            IFpsManager FpsManager = null)
+        public Recorder(IVideoFileWriter? VideoWriter, IImageProvider ImageProvider, int FrameRate,
+            IAudioProvider? AudioProvider = null,
+            IFpsManager? FpsManager = null)
         {
             _videoWriter = VideoWriter ?? throw new ArgumentNullException(nameof(VideoWriter));
             _imageProvider = ImageProvider ?? throw new ArgumentNullException(nameof(ImageProvider));
@@ -296,10 +296,8 @@ namespace Captura.Video
             }
 
             _imageProvider?.Dispose();
-            _imageProvider = null;
 
             _videoWriter.Dispose();
-            _videoWriter = null;
 
             _audioBuffer = _silenceBuffer = null;
 
@@ -322,7 +320,7 @@ namespace Captura.Video
         /// <summary>
         /// Fired when an error occurs
         /// </summary>
-        public event Action<Exception> ErrorOccurred;
+        public event Action<Exception>? ErrorOccurred;
 
         void ThrowIfDisposed()
         {

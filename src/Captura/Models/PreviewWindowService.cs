@@ -61,7 +61,7 @@ namespace Captura.Video
                         {
                             // TODO: Preview is not shown during Webcam only recordings
                             // This check swallows errors
-                            var h = drawingFrame.Bitmap.Height;
+                            var h = drawingFrame.Bitmap?.Height;
 
                             if (h == 0)
                                 return;

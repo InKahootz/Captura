@@ -27,7 +27,7 @@ namespace Captura.FFmpeg
 
         readonly StringBuilder _complete = new StringBuilder();
 
-        public event Action<int> ProgressChanged;
+        public event Action<int>? ProgressChanged;
 
         TimeSpan? _duration;
         int _lastReportedProgress;

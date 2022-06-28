@@ -25,13 +25,13 @@ namespace Captura
 
         Point CursorPosition { get; }
 
-        IBitmapImage CaptureTransparent(IWindow Window, bool IncludeCursor = false);
+        IBitmapImage? CaptureTransparent(IWindow Window, bool IncludeCursor = false);
 
         IBitmapImage Capture(Rectangle Region, bool IncludeCursor = false);
 
         IImageProvider GetRegionProvider(Rectangle Region,
             bool IncludeCursor,
-            Func<Point> LocationFunction = null);
+            Func<Point>? LocationFunction = null);
 
         IImageProvider GetWindowProvider(IWindow Window, bool IncludeCursor);
 

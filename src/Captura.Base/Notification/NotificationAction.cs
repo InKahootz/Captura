@@ -10,14 +10,14 @@ namespace Captura
             ClickCommand = new DelegateCommand(() => Click?.Invoke());
         }
 
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public ICommand ClickCommand { get; }
 
-        public event Action Click;
+        public event Action? Click;
     }
 }

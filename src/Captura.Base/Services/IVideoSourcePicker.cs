@@ -5,9 +5,9 @@ namespace Captura.Video
 {
     public interface IVideoSourcePicker
     {
-        IWindow PickWindow(Predicate<IWindow> Filter = null);
+        IWindow? PickWindow(Predicate<IWindow>? Filter = null);
 
-        IScreen PickScreen();
+        IScreen? PickScreen();
 
         Rectangle? PickRegion();
     }

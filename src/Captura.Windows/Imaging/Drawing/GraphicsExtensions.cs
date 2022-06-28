@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using Captura.Native;
@@ -21,7 +22,7 @@ namespace Captura.Windows.Gdi
         /// <summary>
         /// Removes the Pixels on Edges matching TrimColor(default is Transparent) from the Image
         /// </summary>
-        internal static unsafe Bitmap CropEmptyEdges(this Bitmap Image, Color TrimColor = default)
+        internal static unsafe Bitmap? CropEmptyEdges(this Bitmap Image, Color TrimColor = default)
         {
             if (Image == null)
                 return null;
@@ -144,7 +145,7 @@ namespace Captura.Windows.Gdi
         /// <summary>
         /// Creates a Transparent Bitmap from a combination of a Bitmap on a White Background and another on a Black Background
         /// </summary>
-        internal static unsafe Bitmap DifferentiateAlpha(Bitmap WhiteBitmap, Bitmap BlackBitmap)
+        internal static unsafe Bitmap? DifferentiateAlpha(Bitmap WhiteBitmap, Bitmap BlackBitmap)
         {
             if (WhiteBitmap == null || BlackBitmap == null || WhiteBitmap.Size != BlackBitmap.Size)
                 return null;

@@ -18,7 +18,7 @@ namespace Captura.Video
         public RegionProvider(Rectangle Region,
             IPreviewWindow PreviewWindow,
             bool IncludeCursor,
-            Func<Point> LocationFunc = null)
+            Func<Point>? LocationFunc = null)
         {
             _region = Region;
             _includeCursor = IncludeCursor;

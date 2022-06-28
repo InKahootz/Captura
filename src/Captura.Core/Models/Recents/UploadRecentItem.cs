@@ -12,7 +12,7 @@ namespace Captura.Models
         public string Link { get; }
         public IImageUploader UploaderService { get; }
 
-        public UploadRecentItem(string Link, string DeleteHash, IImageUploader UploaderService)
+        public UploadRecentItem(string? Link, string DeleteHash, IImageUploader UploaderService)
         {
             this.DeleteHash = DeleteHash;
             this.UploaderService = UploaderService;

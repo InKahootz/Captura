@@ -6,19 +6,20 @@ namespace Captura.FFmpeg
     {
         public static FFmpegVideoWriterArgs FromVideoWriterArgs(VideoWriterArgs Args, FFmpegVideoCodec VideoCodec)
         {
-            return new FFmpegVideoWriterArgs
+            return new FFmpegVideoWriterArgs(Args.ImageProvider, Args.AudioProvider, Args.FileName)
             {
-                FileName = Args.FileName,
-                ImageProvider = Args.ImageProvider,
                 FrameRate = Args.FrameRate,
                 VideoQuality = Args.VideoQuality,
                 VideoCodec = VideoCodec,
                 AudioQuality = Args.AudioQuality,
-                AudioProvider = Args.AudioProvider
             };
         }
 
-        public FFmpegVideoCodec VideoCodec { get; set; }
+        public FFmpegVideoWriterArgs(IImageProvider imageProvider, Audio.IAudioProvider? audioProvider, string fileName)
+            : base(imageProvider, audioProvider, fileName)
+        { }
+
+        public FFmpegVideoCodec? VideoCodec { get; set; }
         public int Frequency { get; set; } = 44100;
         public int Channels { get; set; } = 2;
     }

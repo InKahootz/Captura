@@ -17,7 +17,7 @@ namespace Captura.MouseKeyHook.Steps
             _modifierStates = ModifierStates.GetCurrent();
         }
 
-        public virtual void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform)
+        public virtual void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform)
         {
             KeyStep.DrawString(Editor, _modifierStates.ToString(_keymap), _keystrokesSettings);
         }

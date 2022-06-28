@@ -30,7 +30,7 @@ namespace Captura.Webcam
             });
         }
 
-        public IBitmapImage Capture(IBitmapLoader BitmapLoader)
+        public IBitmapImage? Capture(IBitmapLoader BitmapLoader)
         {
             return _syncContext.Run(() => _captureWebcam.GetFrame(BitmapLoader));
         }

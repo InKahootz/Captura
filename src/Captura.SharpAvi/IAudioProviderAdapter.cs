@@ -25,7 +25,7 @@ namespace Captura.SharpAvi
 
         public short Format => (short)_provider.WaveFormat.Encoding;
 
-        public byte[] FormatSpecificData
+        public byte[]? FormatSpecificData
         {
             get
             {

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
+
 using DirectShowLib;
 
 // ReSharper disable SuspiciousTypeConversion.Global
@@ -68,19 +70,19 @@ namespace Captura.Webcam
         /// <summary>
         /// DShow Filter: Control preview window -> copy of graphBuilder.
         /// </summary>
-        IVideoWindow _videoWindow;
+        IVideoWindow? _videoWindow;
 
         /// <summary>
         /// DShow Filter: selected video compressor.
         /// </summary>
-        IBaseFilter _videoCompressorFilter;
+        IBaseFilter? _videoCompressorFilter;
 
         /// <summary>
         /// Grabber filter interface. 
         /// </summary>
         IBaseFilter _baseGrabFlt;
 
-        byte[] _savedArray;
+        byte[]? _savedArray;
 
         ISampleGrabber _sampGrabber;
         VideoInfoHeader _videoInfoHeader;
@@ -140,7 +142,7 @@ namespace Captura.Webcam
         /// Gets the current frame from the buffer.
         /// </summary>
         /// <returns>The Bitmap of the frame.</returns>
-        public IBitmapImage GetFrame(IBitmapLoader BitmapLoader)
+        public IBitmapImage? GetFrame(IBitmapLoader BitmapLoader)
         {
             if (_actualGraphState != GraphState.Rendered)
                 return null;
@@ -205,7 +207,10 @@ namespace Captura.Webcam
         ///  but leave the filters unconnected. Call RenderGraph()
         ///  to connect the filters.
         /// </summary>
+        [MemberNotNull(nameof(_graphBuilder), nameof(_captureGraphBuilder), nameof(_sampGrabber), nameof(_baseGrabFlt),
+            nameof(_mediaControl), nameof(_videoInfoHeader), nameof(_videoDeviceFilter))]
         void CreateGraph()
+#pragma warning disable CS8774 // Member must have a non-null value when exiting.
         {
             // Skip if already created
             if (_actualGraphState < GraphState.Created)
@@ -229,30 +234,27 @@ namespace Captura.Webcam
                 var media = new AMMediaType();
 
                 // Get the video device and add it to the filter graph
-                if (_videoDevice != null)
-                {
-                    _videoDeviceFilter = (IBaseFilter)Marshal.BindToMoniker(_videoDevice.MonikerString);
+                _videoDeviceFilter = (IBaseFilter)Marshal.BindToMoniker(_videoDevice.MonikerString);
 
-                    hr = _graphBuilder.AddFilter(_videoDeviceFilter, "Video Capture Device");
+                hr = _graphBuilder.AddFilter(_videoDeviceFilter, "Video Capture Device");
 
-                    if (hr < 0)
-                        Marshal.ThrowExceptionForHR(hr);
+                if (hr < 0)
+                    Marshal.ThrowExceptionForHR(hr);
 
-                    media.majorType = MediaType.Video;
-                    media.subType = MediaSubType.RGB32;
-                    media.formatType = FormatType.VideoInfo;
-                    media.temporalCompression = true;
+                media.majorType = MediaType.Video;
+                media.subType = MediaSubType.RGB32;
+                media.formatType = FormatType.VideoInfo;
+                media.temporalCompression = true;
 
-                    hr = _sampGrabber.SetMediaType(media);
+                hr = _sampGrabber.SetMediaType(media);
 
-                    if (hr < 0)
-                        Marshal.ThrowExceptionForHR(hr);
+                if (hr < 0)
+                    Marshal.ThrowExceptionForHR(hr);
 
-                    hr = _graphBuilder.AddFilter(_baseGrabFlt, "Grabber");
+                hr = _graphBuilder.AddFilter(_baseGrabFlt, "Grabber");
 
-                    if (hr < 0)
-                        Marshal.ThrowExceptionForHR(hr);
-                }
+                if (hr < 0)
+                    Marshal.ThrowExceptionForHR(hr);
 
                 // Retrieve the stream control interface for the video device
                 // FindInterface will also add any required filters
@@ -271,11 +273,11 @@ namespace Captura.Webcam
                     med = MediaType.Video;
                     _captureGraphBuilder.FindInterface(cat, med, _videoDeviceFilter, iid, out _);
                 }
-                
+
                 // Retreive the media control interface (for starting/stopping graph)
                 _mediaControl = (IMediaControl)_graphBuilder;
 
-                _videoInfoHeader = Marshal.PtrToStructure<VideoInfoHeader>(media.formatPtr);
+                _videoInfoHeader = Marshal.PtrToStructure<VideoInfoHeader>(media.formatPtr)!;
                 Marshal.FreeCoTaskMem(media.formatPtr);
                 media.formatPtr = IntPtr.Zero;
 
@@ -294,6 +296,7 @@ namespace Captura.Webcam
             // Update the state now that we are done
             _actualGraphState = GraphState.Created;
         }
+#pragma warning restore CS8774 // Member must have a non-null value when exiting.
 
         /// <summary>
         ///  Disconnect and remove all filters except the device
@@ -315,7 +318,7 @@ namespace Captura.Webcam
                 _videoWindow = null;
             }
 
-            if ((int) _actualGraphState < (int) GraphState.Rendered)
+            if ((int)_actualGraphState < (int)GraphState.Rendered)
                 return;
 
             // Update the state
@@ -464,7 +467,7 @@ namespace Captura.Webcam
                 if (media.formatType != FormatType.VideoInfo || media.formatPtr == IntPtr.Zero)
                     throw new NotSupportedException("Unknown Grabber Media Format");
 
-                _videoInfoHeader = (VideoInfoHeader)Marshal.PtrToStructure(media.formatPtr, typeof(VideoInfoHeader));
+                _videoInfoHeader = Marshal.PtrToStructure<VideoInfoHeader>(media.formatPtr)!;
 
                 Marshal.FreeCoTaskMem(media.formatPtr);
                 media.formatPtr = IntPtr.Zero;
@@ -527,33 +530,22 @@ namespace Captura.Webcam
 
                 // Cleanup
                 Marshal.ReleaseComObject(_graphBuilder);
-                _graphBuilder = null;
             }
 
             if (_captureGraphBuilder != null)
             {
                 Marshal.ReleaseComObject(_captureGraphBuilder);
-
-                _captureGraphBuilder = null;
             }
 
             if (_videoDeviceFilter != null)
             {
                 Marshal.ReleaseComObject(_videoDeviceFilter);
-
-                _videoDeviceFilter = null;
             }
 
             if (_videoCompressorFilter != null)
             {
                 Marshal.ReleaseComObject(_videoCompressorFilter);
-
-                _videoCompressorFilter = null;
             }
-
-            // These are copies of graphBuilder
-            _mediaControl = null;
-            _videoWindow = null;
 
             // For unmanaged objects we haven't released explicitly
             GC.Collect();

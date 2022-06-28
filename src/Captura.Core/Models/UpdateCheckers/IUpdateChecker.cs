@@ -7,7 +7,7 @@ namespace Captura.Models
     {
         void GoToDownloadsPage();
 
-        Task<Version> Check();
+        Task<Version?> Check();
 
         string BuildName { get; }
     }

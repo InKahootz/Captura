@@ -21,6 +21,6 @@ namespace Captura.Windows.DesktopDuplication
 
         public OutputDuplicateFrameInformation FrameInfo { get; }
 
-        public Resource DesktopResource { get; }
+        public Resource? DesktopResource { get; }
     }
 }

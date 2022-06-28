@@ -75,7 +75,7 @@ namespace Captura.Hotkeys
             }
         }
 
-        static string SpaceAtCapitals<T>(T Obj)
+        static string SpaceAtCapitals(ServiceName Obj)
         {
             var s = Obj.ToString();
 
@@ -84,7 +84,7 @@ namespace Captura.Hotkeys
             for (var i = 0; i < s.Length; ++i)
             {
                 if (i != 0 && char.IsUpper(s[i]))
-                    sb.Append(" ");
+                    sb.Append(' ');
 
                 sb.Append(s[i]);
             }

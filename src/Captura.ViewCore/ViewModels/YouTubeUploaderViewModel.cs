@@ -18,13 +18,13 @@ namespace Captura.ViewModels
         readonly YouTubeUploader _uploader;
         readonly CancellationTokenSource _cancellationTokenSource;
         readonly IMessageProvider _messageProvider;
-        Task _uploadTask;
-        string _fileName, _link, _title;
+        Task? _uploadTask;
+        string? _fileName, _link, _title;
         string _description = "\n\n\n\n--------------------------------------------------\n\nUploaded using Captura (https://mathewsachin.github.io/Captura/)";
         YouTubePrivacyStatus _privacyStatus;
         int _progress;
         bool _beganUploading;
-        YouTubeUploadRequest _uploadRequest;
+        YouTubeUploadRequest? _uploadRequest;
 
         readonly IReactiveProperty<bool> _canUpload = new ReactivePropertySlim<bool>(true);
 
@@ -133,19 +133,19 @@ namespace Captura.ViewModels
             return true;
         }
 
-        public string FileName
+        public string? FileName
         {
             get => _fileName;
             private set => Set(ref _fileName, value);
         }
 
-        public string Link
+        public string? Link
         {
             get => _link;
             private set => Set(ref _link, value);
         }
 
-        public string Title
+        public string? Title
         {
             get => _title;
             set => Set(ref _title, value);

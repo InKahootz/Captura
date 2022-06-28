@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Captura.Audio;
 using Captura.Video;
 using SharpAvi.Codecs;
@@ -15,7 +17,7 @@ namespace Captura.SharpAvi
         #region Fields
         AviInternalWriter _writer;
         IAviVideoStream _videoStream;
-        IAviAudioStream _audioStream;
+        IAviAudioStream? _audioStream;
         byte[] _videoBuffer;
         readonly AviCodec _codec;
         readonly object _syncLock = new object();
@@ -34,7 +36,7 @@ namespace Captura.SharpAvi
         /// <param name="ImageProvider">The image source.</param>
         /// <param name="FrameRate">Video Frame Rate.</param>
         /// <param name="AudioProvider">The audio source. null = no audio.</param>
-        public AviWriter(string FileName, AviCodec Codec, IImageProvider ImageProvider, int FrameRate, IAudioProvider AudioProvider = null)
+        public AviWriter(string FileName, AviCodec Codec, IImageProvider ImageProvider, int FrameRate, IAudioProvider? AudioProvider = null)
         {
             _codec = Codec;
 
@@ -69,6 +71,7 @@ namespace Captura.SharpAvi
                 _videoStream.WriteFrame(true, _videoBuffer, 0, _videoBuffer.Length);
         }
 
+        [MemberNotNull(nameof(_videoStream))]
         void CreateVideoStream(int Width, int Height)
         {
             // Select encoder type based on FOURCC of codec
@@ -126,13 +129,7 @@ namespace Captura.SharpAvi
             lock (_syncLock)
             {
                 _writer.Close();
-                _writer = null;
-
-                _videoStream = null;
-                _audioStream = null;
             }
-
-            _videoBuffer = null;
         }
     }
 }

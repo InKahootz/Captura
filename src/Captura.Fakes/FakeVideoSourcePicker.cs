@@ -10,13 +10,13 @@ namespace Captura.Fakes
 
         public static FakeVideoSourcePicker Instance { get; } = new FakeVideoSourcePicker();
 
-        public IWindow SelectedWindow { get; set; }
+        public IWindow? SelectedWindow { get; set; }
 
-        public IWindow PickWindow(Predicate<IWindow> Filter = null) => SelectedWindow;
+        public IWindow? PickWindow(Predicate<IWindow>? Filter = null) => SelectedWindow;
 
-        public IScreen SelectedScreen { get; set; }
+        public IScreen? SelectedScreen { get; set; }
 
-        public IScreen PickScreen() => SelectedScreen;
+        public IScreen? PickScreen() => SelectedScreen;
 
         public Rectangle? PickRegion() => null;
     }

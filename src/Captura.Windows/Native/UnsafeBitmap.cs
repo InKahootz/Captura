@@ -36,7 +36,6 @@ namespace Captura.Native
         public void Dispose()
         {
             _inputBitmap.UnlockBits(_bitmapData);
-            _bitmapData = null;
             _pBase = null;
         }
     }

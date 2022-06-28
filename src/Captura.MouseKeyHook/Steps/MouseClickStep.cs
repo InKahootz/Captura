@@ -44,7 +44,7 @@ namespace Captura.MouseKeyHook.Steps
             return base.Merge(NextStep);
         }
 
-        public override void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null)
+        public override void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null)
         {
             var curPos = Args.Location;
 

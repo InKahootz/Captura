@@ -9,14 +9,14 @@ namespace Captura.Audio
 
         IEnumerable<IAudioItem> Microphones { get; }
 
-        IAudioItem DefaultMicrophone { get; }
+        IAudioItem? DefaultMicrophone { get; }
 
         IEnumerable<IAudioItem> Speakers { get; }
 
-        IAudioItem DefaultSpeaker { get; }
+        IAudioItem? DefaultSpeaker { get; }
 
-        IAudioProvider GetAudioProvider(IAudioItem Microphone, IAudioItem Speaker);
+        IAudioProvider? GetAudioProvider(IAudioItem Microphone, IAudioItem Speaker);
 
-        event Action DevicesUpdated;
+        event Action? DevicesUpdated;
     }
 }

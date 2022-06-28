@@ -79,7 +79,7 @@ namespace Captura.Windows
             }
         }
 
-        public IBitmapImage CaptureTransparent(IWindow Window, bool IncludeCursor = false)
+        public IBitmapImage? CaptureTransparent(IWindow Window, bool IncludeCursor = false)
         {
             return ScreenShot.CaptureTransparent(Window, IncludeCursor, this);
         }
@@ -89,7 +89,7 @@ namespace Captura.Windows
             return ScreenShot.Capture(Region, IncludeCursor);
         }
 
-        public IImageProvider GetRegionProvider(Rectangle Region, bool IncludeCursor, Func<Point> LocationFunction = null)
+        public IImageProvider GetRegionProvider(Rectangle Region, bool IncludeCursor, Func<Point>? LocationFunction = null)
         {
             return new RegionProvider(Region, _previewWindow, IncludeCursor, LocationFunction);
         }
@@ -114,7 +114,7 @@ namespace Captura.Windows
             return GetRegionProvider(Screen.Rectangle, IncludeCursor);
         }
 
-        static Output1 FindOutput(IScreen Screen)
+        static Output1? FindOutput(IScreen Screen)
         {
             var outputs = new Factory1()
                 .Adapters1

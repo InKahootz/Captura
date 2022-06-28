@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Captura.ViewModels
     public class RecordingModel : ViewModelBase, IDisposable
     {
         #region Fields
-        IRecorder _recorder;
+        IRecorder? _recorder;
         readonly SyncContextManager _syncContext = new SyncContextManager();
 
         readonly ISystemTray _systemTray;
@@ -111,7 +112,7 @@ namespace Captura.ViewModels
             }
         }
 
-        bool GetImageProviderSafe(Func<IImageProvider> Getter, RecordingModelParams RecordingParams, out IImageProvider ImageProvider)
+        bool GetImageProviderSafe(Func<IImageProvider> Getter, RecordingModelParams RecordingParams, [NotNullWhen(true)] out IImageProvider? ImageProvider)
         {
             ImageProvider = null;
 
@@ -142,7 +143,7 @@ namespace Captura.ViewModels
             if (!GetImageProviderSafe(ImgProviderGetter, RecordingParams, out var imgProvider))
                 return false;
 
-            IVideoFileWriter videoEncoder;
+            IVideoFileWriter? videoEncoder;
 
             try
             {
@@ -244,7 +245,7 @@ namespace Captura.ViewModels
             return true;
         }
 
-        public bool StartRecording(RecordingModelParams RecordingParams, string FileName = null)
+        public bool StartRecording(RecordingModelParams RecordingParams, string? FileName = null)
         {
             IsVideo = !(RecordingParams.VideoSourceKind is NoVideoSourceProvider);
 
@@ -437,26 +438,23 @@ namespace Captura.ViewModels
             _timerModel.Stop();
         }
 
-        IVideoFileWriter GetVideoFileWriterWithPreview(IImageProvider ImgProvider, IAudioProvider AudioProvider, RecordingModelParams RecordingParams)
+        IVideoFileWriter? GetVideoFileWriterWithPreview(IImageProvider ImgProvider, IAudioProvider AudioProvider, RecordingModelParams RecordingParams)
         {
             return RecordingParams.VideoSourceKind is NoVideoSourceProvider
                 ? null
                 : new WithPreviewWriter(GetVideoFileWriter(ImgProvider, AudioProvider, RecordingParams), _previewWindow);
         }
 
-        IVideoFileWriter GetVideoFileWriter(IImageProvider ImgProvider, IAudioProvider AudioProvider, RecordingModelParams RecordingParams, string FileName = null)
+        IVideoFileWriter? GetVideoFileWriter(IImageProvider ImgProvider, IAudioProvider? AudioProvider, RecordingModelParams RecordingParams, string? FileName = null)
         {
             if (RecordingParams.VideoSourceKind is NoVideoSourceProvider)
                 return null;
 
-            var args = new VideoWriterArgs
+            var args = new VideoWriterArgs(ImgProvider, AudioProvider, FileName ?? CurrentFileName)
             {
-                FileName = FileName ?? CurrentFileName,
                 FrameRate = Settings.Video.FrameRate,
                 VideoQuality = Settings.Video.Quality,
-                ImageProvider = ImgProvider,
                 AudioQuality = Settings.Audio.Quality,
-                AudioProvider = AudioProvider
             };
 
             if (Settings.Video.RecorderMode == RecorderMode.Replay)
@@ -507,7 +505,7 @@ namespace Captura.ViewModels
             // Image Overlays
             foreach (var overlay in Settings.ImageOverlays.Where(M => M.Display))
             {
-                IOverlay imgOverlay = null;
+                IOverlay? imgOverlay = null;
 
                 try
                 {
@@ -523,7 +521,7 @@ namespace Captura.ViewModels
             }
         }
 
-        IImageProvider GetImageProviderWithOverlays(RecordingModelParams RecordingParams, IMouseKeyHook MouseKeyHook)
+        IImageProvider? GetImageProviderWithOverlays(RecordingModelParams RecordingParams, IMouseKeyHook MouseKeyHook)
         {
             var imageProvider = GetImageProvider(RecordingParams);
 
@@ -532,7 +530,7 @@ namespace Captura.ViewModels
                 : new OverlayedImageProvider(imageProvider, GetOverlays(RecordingParams, MouseKeyHook).ToArray());
         }
 
-        IImageProvider GetImageProvider(RecordingModelParams RecordingParams)
+        IImageProvider? GetImageProvider(RecordingModelParams RecordingParams)
         {
             return RecordingParams
                 .VideoSourceKind

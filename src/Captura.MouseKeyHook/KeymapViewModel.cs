@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,7 +10,7 @@ namespace Captura.MouseKeyHook
 {
     public class KeymapViewModel : NotifyPropertyChanged
     {
-        Keymap _keymap;
+        Keymap? _keymap;
 
         public const string DefaultKeymapFileName = "en";
 
@@ -40,7 +41,7 @@ namespace Captura.MouseKeyHook
                     {
                         var content = File.ReadAllText(M);
 
-                        var name = JObject.Parse(content)["Name"];
+                        var name = JObject.Parse(content)["Name"]!;
 
                         return new KeymapItem(M, name.ToString());
                     }));
@@ -63,13 +64,18 @@ namespace Captura.MouseKeyHook
 
         public IReadOnlyList<KeymapItem> AvailableKeymaps => _keymaps;
 
-        KeymapItem _selectedKeymap;
+        KeymapItem? _selectedKeymap;
 
-        public KeymapItem SelectedKeymap
+        public KeymapItem? SelectedKeymap
         {
             get => _selectedKeymap;
             set
             {
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
                 if (!File.Exists(value.FileName))
                     return;
 
@@ -106,9 +112,9 @@ namespace Captura.MouseKeyHook
             Init(keymap);
         }
 
-        public string Find(Keys Key, ModifierStates Modifiers)
+        public string? Find(Keys Key, ModifierStates Modifiers)
         {
-            return _keymap.Mappings
+            return _keymap?.Mappings
                 .Where(M => M.On.Any(S => S.Control == Modifiers.Control
                               && S.Alt == Modifiers.Alt
                               && S.Shift == Modifiers.Shift

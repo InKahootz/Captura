@@ -20,7 +20,7 @@ namespace Captura.MouseKeyHook.Steps
             _settings = Settings;
         }
 
-        public override void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform)
+        public override void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform)
         {
             var p = Args.Location;
 

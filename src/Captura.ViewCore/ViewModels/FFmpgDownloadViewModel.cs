@@ -19,7 +19,7 @@ namespace Captura.ViewModels
         public ICommand OpenFolderCommand { get; }
 
         public IReadOnlyReactiveProperty<int> Progress { get; }
-        public IReadOnlyReactiveProperty<string> Status { get; }
+        public IReadOnlyReactiveProperty<string?> Status { get; }
         public IReadOnlyReactiveProperty<bool> InProgress { get; }
         public IReadOnlyReactiveProperty<bool> IsDone { get; }
         public IReadOnlyReactiveProperty<bool> CanCancel { get; }
@@ -33,7 +33,7 @@ namespace Captura.ViewModels
         readonly IMessageProvider _messageProvider;
         readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        Task<bool> _downloadTask;
+        Task<bool>? _downloadTask;
 
         public FFmpegDownloadViewModel(FFmpegSettings FFmpegSettings,
             FFmpegDownloadModel DownloadModel,
@@ -115,8 +115,8 @@ namespace Captura.ViewModels
                 .ToReadOnlyReactivePropertySlim();
         }
 
-        public event Action<int> ProgressChanged;
-        public event Action<bool> AfterDownload;
+        public event Action<int>? ProgressChanged;
+        public event Action<bool>? AfterDownload;
 
         public async Task<bool> Cancel()
         {

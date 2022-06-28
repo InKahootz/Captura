@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
 using SharpDX;
 using SharpDX.Direct3D11;
 using SharpDX.DXGI;
@@ -13,7 +15,7 @@ namespace Captura.Windows.DesktopDuplication
         Device _device;
         OutputDuplication _deskDupl;
         FrameGrabber _frameGrabber;
-        Texture2D _bkpTexture;
+        Texture2D? _bkpTexture;
         readonly int _width, _height;
 
         readonly object _syncLock = new object();
@@ -38,16 +40,13 @@ namespace Captura.Windows.DesktopDuplication
             lock (_syncLock)
             {
                 _frameGrabber?.Dispose();
-
                 _deskDupl?.Dispose();
-
                 _bkpTexture?.Dispose();
-
                 _device.Dispose();
-                _device = null;
             }
         }
 
+        [MemberNotNull(nameof(_deskDupl), nameof(_frameGrabber))]
         public void Init()
         {
             lock (_syncLock)
@@ -76,7 +75,7 @@ namespace Captura.Windows.DesktopDuplication
             }
         }
 
-        public bool Get(Texture2D Texture, DxMousePointer DxMousePointer, Point TargetPosition = default)
+        public bool Get(Texture2D Texture, DxMousePointer? DxMousePointer, Point TargetPosition = default)
         {
             lock (_syncLock)
             {
@@ -114,7 +113,7 @@ namespace Captura.Windows.DesktopDuplication
                     throw new Exception($"Failed to acquire next frame: {acquireResult.Result.Code}");
                 }
 
-                using (acquireResult.DesktopResource)
+                using (acquireResult.DesktopResource ?? throw new InvalidOperationException())
                 using (var tempTexture = acquireResult.DesktopResource.QueryInterface<Texture2D>())
                 {
                     DxMousePointer?.Update(tempTexture, acquireResult.FrameInfo, _deskDupl);

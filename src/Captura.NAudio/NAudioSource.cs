@@ -10,7 +10,7 @@ namespace Captura.Audio
         MMDeviceEnumerator _deviceEnumerator = new MMDeviceEnumerator();
         NAudioNotificationClient _notificationClient = new NAudioNotificationClient();
 
-        public event Action DevicesUpdated;
+        public event Action? DevicesUpdated;
 
         public NAudioSource()
         {
@@ -36,7 +36,7 @@ namespace Captura.Audio
 
         const int DeviceNotFound = unchecked((int)0x80070490);
 
-        public IAudioItem DefaultMicrophone
+        public IAudioItem? DefaultMicrophone
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Captura.Audio
             }
         }
 
-        public IAudioItem DefaultSpeaker
+        public IAudioItem? DefaultSpeaker
         {
             get
             {
@@ -84,13 +84,10 @@ namespace Captura.Audio
         public void Dispose()
         {
             _deviceEnumerator.UnregisterEndpointNotificationCallback(_notificationClient);
-            _notificationClient = null;
-
             _deviceEnumerator.Dispose();
-            _deviceEnumerator = null;
         }
 
-        public IAudioProvider GetAudioProvider(IAudioItem Microphone, IAudioItem Speaker)
+        public IAudioProvider? GetAudioProvider(IAudioItem Microphone, IAudioItem Speaker)
         {
             switch ((Microphone, Speaker))
             {

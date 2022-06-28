@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -59,7 +59,7 @@ namespace Captura.Hotkeys
             {
                 var json = File.ReadAllText(GetFilePath());
 
-                models = JsonConvert.DeserializeObject<IEnumerable<HotkeyModel>>(json);
+                models = JsonConvert.DeserializeObject<IEnumerable<HotkeyModel>>(json)!;
             }
             catch
             {

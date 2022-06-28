@@ -81,9 +81,9 @@ namespace Captura.ViewModels
             private set => Set(ref _checkFailed, value);
         }
 
-        string _newVersion;
+        string? _newVersion;
 
-        public string NewVersion
+        public string? NewVersion
         {
             get => _newVersion;
             private set => Set(ref _newVersion, value);

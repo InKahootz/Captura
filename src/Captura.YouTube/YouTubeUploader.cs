@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
@@ -13,7 +14,7 @@ namespace Captura.YouTube
         readonly IYouTubeApiKeys _apiKeys;
         readonly ProxySettings _proxySettings;
 
-        YouTubeService _youtubeService;
+        YouTubeService? _youtubeService;
 
         public YouTubeUploader(IYouTubeApiKeys ApiKeys,
             ProxySettings ProxySettings)
@@ -30,11 +31,11 @@ namespace Captura.YouTube
         public async Task<YouTubeUploadRequest> CreateUploadRequest(string FileName,
             string Title,
             string Description,
-            string[] Tags = null,
+            string[]? Tags = null,
             YouTubePrivacyStatus PrivacyStatus = YouTubePrivacyStatus.Unlisted)
         {
             if (_youtubeService == null)
-                await Init();
+                _youtubeService = await Init();
 
             var video = new Google.Apis.YouTube.v3.Data.Video
             {
@@ -51,7 +52,7 @@ namespace Captura.YouTube
             return new YouTubeUploadRequest(FileName, _youtubeService, video);
         }
 
-        async Task Init()
+        async Task<YouTubeService> Init()
         {
             WebRequest.DefaultWebProxy = _proxySettings.GetWebProxy();
 
@@ -69,7 +70,7 @@ namespace Captura.YouTube
                 CancellationToken.None
             );
 
-            _youtubeService = new YouTubeService(new BaseClientService.Initializer
+            return new YouTubeService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credential,
                 ApplicationName = nameof(Captura)

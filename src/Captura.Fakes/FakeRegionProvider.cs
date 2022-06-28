@@ -20,9 +20,7 @@ namespace Captura.Fakes
 
         public IVideoItem VideoSource => new RegionItem(this, ServiceProvider.Get<IPlatformServices>());
 
-#pragma warning disable CS0067
-        public event Action SelectorHidden;
-#pragma warning restore CS0067
+        public event Action? SelectorHidden;
 
         public IntPtr Handle => IntPtr.Zero;
     }

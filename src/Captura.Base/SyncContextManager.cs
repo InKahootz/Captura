@@ -20,14 +20,14 @@ namespace Captura.Models
             else _syncContext.Send(D => Action(), null);
         }
 
-        public T Run<T>(Func<T> Action)
+        public T? Run<T>(Func<T> Action)
         {
             if (_syncContext == null)
             {
                 return Action();
             }
 
-            T result = default;
+            T? result = default;
 
             _syncContext.Send(D => result = Action(), null);
 

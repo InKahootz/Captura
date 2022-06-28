@@ -13,7 +13,7 @@ namespace Captura.Windows.DesktopDuplication
     {
         Direct2DEditorSession _editorSession;
         Texture2D _copyTex;
-        Bitmap _bmp;
+        Bitmap? _bmp;
         protected byte[] ShapeBuffer, DesktopBuffer;
 
         protected int Width { get; }
@@ -48,7 +48,7 @@ namespace Captura.Windows.DesktopDuplication
             DesktopBuffer = new byte[Width * Height * 4];
         }
 
-        public Bitmap GetBitmap() => _bmp;
+        public Bitmap? GetBitmap() => _bmp;
 
         public void Update(Texture2D DesktopTexture, OutputDuplicatePointerPosition PointerPosition)
         {
@@ -110,14 +110,8 @@ namespace Captura.Windows.DesktopDuplication
         public void Dispose()
         {
             _bmp?.Dispose();
-            _bmp = null;
 
             _copyTex?.Dispose();
-            _copyTex = null;
-
-            ShapeBuffer = DesktopBuffer = null;
-
-            _editorSession = null;
 
             OnDispose();
         }

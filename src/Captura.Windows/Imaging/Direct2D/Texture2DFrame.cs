@@ -11,14 +11,14 @@ namespace Captura.Windows.DirectX
 {
     public class Texture2DFrame : INV12Frame
     {
-        public Texture2D Texture { get; }
-        public Texture2D PreviewTexture { get; }
+        public Texture2D? Texture { get; }
+        public Texture2D? PreviewTexture { get; }
 
-        public Device Device { get; }
+        public Device? Device { get; }
 
         public TimeSpan Timestamp { get; }
 
-        readonly Lazy<MfColorConverter> _colorConverter;
+        readonly Lazy<MfColorConverter>? _colorConverter;
 
         public Texture2DFrame(Texture2D Texture,
             Device Device,
@@ -49,6 +49,11 @@ namespace Captura.Windows.DirectX
 
         public void CopyTo(byte[] Buffer)
         {
+            if (Device is null)
+            {
+                return;
+            }
+
             var mapSource = Device.ImmediateContext.MapSubresource(Texture, 0, MapMode.Read, MapFlags.None);
 
             var destStride = Width * 4;
@@ -72,6 +77,11 @@ namespace Captura.Windows.DirectX
 
         public void CopyTo(IntPtr Buffer)
         {
+            if (Device is null)
+            {
+                return;
+            }
+
             var mapSource = Device.ImmediateContext.MapSubresource(Texture, 0, MapMode.Read, MapFlags.None);
 
             var destStride = Width * 4;
@@ -94,7 +104,7 @@ namespace Captura.Windows.DirectX
 
         public void CopyNV12To(byte[] Buffer)
         {
-            _colorConverter.Value.Convert(Texture, Buffer);
+            _colorConverter!.Value.Convert(Texture!, Buffer);
         }
     }
 }

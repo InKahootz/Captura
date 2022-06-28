@@ -5,7 +5,7 @@ namespace Captura.Video
 {
     public class CustomImageOverlay : ImageOverlay
     {
-        IBitmapImage _bmp;
+        IBitmapImage? _bmp;
         readonly CustomImageOverlaySettings _settings;
 
         public CustomImageOverlay(CustomImageOverlaySettings ImageOverlaySettings)
@@ -14,7 +14,7 @@ namespace Captura.Video
             _settings = ImageOverlaySettings;
         }
 
-        public override void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null)
+        public override void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null)
         {
             var img = GetImage(Editor);
 

@@ -11,7 +11,7 @@ namespace Captura
 
     public class ProxySettings : PropertyStore
     {
-        public IWebProxy GetWebProxy()
+        public IWebProxy? GetWebProxy()
         {
             if (Type == ProxyType.None)
                 return null;

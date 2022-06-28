@@ -113,12 +113,8 @@ namespace Captura.Windows.MediaFoundation
             _colorConverter.ProcessMessage(TMessageType.NotifyEndOfStream, IntPtr.Zero);
 
             _inputSample.Dispose();
-
             _copyTexture.Dispose();
-
             _colorConverter.Dispose();
-            _colorConverter = null;
-
             _deviceMan.Dispose();
         }
     }

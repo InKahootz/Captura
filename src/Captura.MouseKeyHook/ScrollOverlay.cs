@@ -11,7 +11,7 @@ namespace Captura.MouseKeyHook
     public class ScrollOverlay : IOverlay
     {
         readonly MouseClickSettings _settings;
-        MouseEventArgs _lastArgs;
+        MouseEventArgs? _lastArgs;
 
         public ScrollOverlay(IMouseKeyHook Hook,
             MouseClickSettings Settings)
@@ -23,7 +23,7 @@ namespace Captura.MouseKeyHook
 
         public void Dispose() { }
 
-        public void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null)
+        public void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null)
         {
             if (!_settings.DisplayScroll)
                 return;

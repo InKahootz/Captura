@@ -96,7 +96,7 @@ namespace Captura.Imgur
             using var w = new WebClient { Proxy = _proxySettings.GetWebProxy() };
             var token = await UploadValuesAsync<ImgurRefreshTokenResponse>(w, "https://api.imgur.com/oauth2/token.json", args);
 
-            if (string.IsNullOrEmpty(token?.AccessToken))
+            if (string.IsNullOrEmpty(token.AccessToken))
                 return false;
 
             _settings.AccessToken = token.AccessToken;
@@ -110,7 +110,7 @@ namespace Captura.Imgur
             // Task.Run done to prevent UI thread from freezing when upload fails.
             var response = await Task.Run(async () => await WebClient.UploadValuesTaskAsync(Url, Values));
 
-            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(response));
+            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(response))!;
         }
 
         public async Task DeleteUploadedFile(string DeleteHash)
@@ -130,7 +130,7 @@ namespace Captura.Imgur
 
                 var text = await reader.ReadToEndAsync();
 
-                var res = JsonConvert.DeserializeObject<ImgurResponse>(text);
+                var res = JsonConvert.DeserializeObject<ImgurResponse>(text)!;
 
                 if (res.Success)
                     return;

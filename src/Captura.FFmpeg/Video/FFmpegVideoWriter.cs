@@ -12,7 +12,7 @@ namespace Captura.FFmpeg
     /// </summary>
     class FFmpegWriter : IVideoFileWriter
     {
-        readonly NamedPipeServerStream _audioPipe;
+        readonly NamedPipeServerStream? _audioPipe;
 
         readonly Process _ffmpegProcess;
         readonly NamedPipeServerStream _ffmpegIn;
@@ -121,8 +121,6 @@ namespace Captura.FFmpeg
             _audioPipe?.Dispose();
 
             _ffmpegProcess.WaitForExit();
-
-            _videoBuffer = null;
         }
 
         /// <summary>
@@ -132,7 +130,7 @@ namespace Captura.FFmpeg
 
         bool _firstAudio = true;
 
-        Task _lastAudio;
+        Task? _lastAudio;
 
         /// <summary>
         /// Write audio block to Audio Stream.
@@ -196,7 +194,7 @@ namespace Captura.FFmpeg
         readonly int _audioBytesPerFrame;
         int _audioBytesDropped;
 
-        Task _lastFrameTask;
+        Task? _lastFrameTask;
 
         /// <summary>
         /// Writes an Image frame.
@@ -263,7 +261,7 @@ namespace Captura.FFmpeg
                     _lastFrameTask.Wait();
                 }
 
-                _lastFrameTask = _lastFrameTask.ContinueWith(async M =>
+                _lastFrameTask = _lastFrameTask?.ContinueWith(async M =>
                 {
                     try
                     {

@@ -9,7 +9,7 @@ namespace Captura.Models
     public class DevUpdateChecker : IUpdateChecker
     {
         readonly ProxySettings _proxySettings;
-        readonly Version _currentVersion;
+        readonly Version? _currentVersion;
 
         public DevUpdateChecker(ProxySettings ProxySettings)
         {
@@ -26,7 +26,7 @@ namespace Captura.Models
         const string DownloadsUrl = "https://ci.appveyor.com/project/MathewSachin/captura/branch/master";
         const string MasterBuildUrl = "https://ci.appveyor.com/api/projects/MathewSachin/Captura/branch/master";
 
-        public async Task<Version> Check()
+        public async Task<Version?> Check()
         {
             using (var w = new WebClient { Proxy = _proxySettings.GetWebProxy() })
             {
@@ -34,7 +34,7 @@ namespace Captura.Models
 
                 var jObj = JObject.Parse(result);
 
-                var version = Version.Parse(jObj["build"]["version"].ToString());
+                var version = Version.Parse(jObj["build"]?["version"]?.ToString() ?? "0.0.0");
 
                 if (version > _currentVersion)
                 {
@@ -45,6 +45,6 @@ namespace Captura.Models
             return null;
         }
 
-        public string BuildName => _currentVersion.Build == 0 ? "DEV" : "CI";
+        public string BuildName => _currentVersion?.Build == 0 ? "DEV" : "CI";
     }
 }

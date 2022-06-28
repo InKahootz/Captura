@@ -8,24 +8,23 @@ namespace Captura.Loc
 {
     public class LanguageFields : NotifyPropertyChanged, ILocalizationProvider
     {
-        protected virtual string GetValue(string Key) => "";
+        protected virtual string GetValue(string? Key) => "";
 
-                protected virtual void SetValue(string Key, string Value) { }
-        // ReSharper restore UnusedParameter.Global
+        protected virtual void SetValue(string? Key, string Value) { }
 
-        string Get([CallerMemberName] string PropertyName = null)
+        string Get([CallerMemberName] string? PropertyName = null)
         {
             return GetValue(PropertyName);
         }
 
-        void Set(string Value, [CallerMemberName] string PropertyName = null)
+        void Set(string Value, [CallerMemberName] string? PropertyName = null)
         {
             SetValue(PropertyName, Value);
 
             RaisePropertyChanged(PropertyName);
         }
 
-        public virtual event Action<CultureInfo> LanguageChanged;
+        public virtual event Action<CultureInfo>? LanguageChanged;
 
         public string About
         {

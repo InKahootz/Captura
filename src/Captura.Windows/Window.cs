@@ -163,7 +163,7 @@ namespace Captura.Video
         /// true if the specified object  is equal to the current object; otherwise, false.
         /// </returns>
         /// <param name="Obj">The object to compare with the current object. </param>
-        public override bool Equals(object Obj) => Obj is Window w && w.Handle == Handle;
+        public override bool Equals(object? Obj) => Obj is Window w && w.Handle == Handle;
         
         /// <summary>
         /// Serves as the default hash function. 

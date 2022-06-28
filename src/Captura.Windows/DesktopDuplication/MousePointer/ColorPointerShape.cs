@@ -29,7 +29,6 @@ namespace Captura.Windows.DesktopDuplication
         public void Dispose()
         {
             _bmp.Dispose();
-            _bmp = null;
         }
     }
 }

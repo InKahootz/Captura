@@ -2,6 +2,6 @@
 {
     public class VideoConverterArgs : VideoWriterArgs
     {
-        public string InputFile { get; set; }
+        public string? InputFile { get; set; }
     }
 }

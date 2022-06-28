@@ -15,7 +15,7 @@ namespace Captura.Video
         /// <summary>
         /// Draws overlay.
         /// </summary>
-        public void Draw(IEditableFrame Editor, Func<Point, Point> Transform = null)
+        public void Draw(IEditableFrame Editor, Func<Point, Point>? Transform = null)
         {
             if (!_settings.Display)
                 return;

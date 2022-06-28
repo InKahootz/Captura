@@ -23,6 +23,6 @@
 
         public int DownloadProgress { get; }
 
-        public string ErrorMessage { get; }
+        public string? ErrorMessage { get; }
     }
 }

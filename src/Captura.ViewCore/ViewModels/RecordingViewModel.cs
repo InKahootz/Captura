@@ -170,13 +170,13 @@ namespace Captura.ViewModels
         {
             _audioPlayer.Play(SoundKind.Stop);
 
-            FileRecentItem savingRecentItem = null;
-            FileSaveNotification notification = null;
+            FileRecentItem? savingRecentItem = null;
+            FileSaveNotification? notification = null;
 
             var fileName = _recordingModel.CurrentFileName;
             var isVideo = _recordingModel.IsVideo;
 
-            IVideoConverter postWriter = null;
+            IVideoConverter? postWriter = null;
 
             // Assume saving to file only when extension is present
             if (!_timerModel.Waiting && !string.IsNullOrWhiteSpace(_videoWritersViewModel.SelectedVideoWriter.Extension))
@@ -211,14 +211,14 @@ namespace Captura.ViewModels
 
                 if (postWriter != null)
                 {
-                    notification.Converting();
+                    notification?.Converting();
 
                     var progress = new Progress<int>();
 
-                    progress.ProgressChanged += (S, E) => notification.Progress = E;
+                    progress.ProgressChanged += (S, E) => notification?.Progress = E;
 
                     var outFileName = Path.Combine(
-                        Path.GetDirectoryName(fileName),
+                        Path.GetDirectoryName(fileName)!,
                         $"{Path.GetFileNameWithoutExtension(fileName)}.converted{postWriter.Extension}");
 
                     try
@@ -234,13 +234,13 @@ namespace Captura.ViewModels
                         File.Delete(fileName);
 
                         var targetFileName = Path.Combine(
-                            Path.GetDirectoryName(fileName),
+                            Path.GetDirectoryName(fileName)!,
                             $"{Path.GetFileNameWithoutExtension(fileName)}{postWriter.Extension}");
 
                         File.Move(outFileName, targetFileName);
 
-                        savingRecentItem.Converted(targetFileName);
-                        notification.Converted(targetFileName);
+                        savingRecentItem?.Converted(targetFileName);
+                        notification?.Converted(targetFileName);
                     }
                     catch (FFmpegNotFoundException e)
                     {
@@ -290,14 +290,14 @@ namespace Captura.ViewModels
             }
         }
 
-        void AfterSave(FileRecentItem SavingRecentItem, FileSaveNotification Notification)
+        void AfterSave(FileRecentItem SavingRecentItem, FileSaveNotification? Notification)
         {
             SavingRecentItem.Saved();
 
             if (Settings.CopyOutPathToClipboard)
                 SavingRecentItem.FileName.WriteToClipboard();
 
-            Notification.Saved();
+            Notification?.Saved();
         }
 
         void StartRecording()

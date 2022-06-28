@@ -50,6 +50,6 @@ namespace Captura.Video
             }
         }
 
-        public event Action<Exception> ErrorOccurred;
+        public event Action<Exception>? ErrorOccurred;
     }
 }

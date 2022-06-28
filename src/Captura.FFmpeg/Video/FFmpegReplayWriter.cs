@@ -17,7 +17,7 @@ namespace Captura.FFmpeg
 
         readonly Func<VideoWriterArgs, IVideoFileWriter> _writerGenerator;
 
-        IVideoFileWriter _currentWriter;
+        IVideoFileWriter? _currentWriter;
 
         string GetFileName(int Index)
         {
@@ -93,7 +93,7 @@ namespace Captura.FFmpeg
             }
         }
 
-        Task _prevWriterDisposeTask;
+        Task? _prevWriterDisposeTask;
 
         IVideoFileWriter GetWriter()
         {
@@ -116,13 +116,10 @@ namespace Captura.FFmpeg
                 _currentFile %= NoOfFiles;
             }
 
-            return _currentWriter ??= _writerGenerator(new VideoWriterArgs
+            return _currentWriter ??= _writerGenerator(new VideoWriterArgs(_videoWriterArgs.ImageProvider, _videoWriterArgs.AudioProvider, GetFileName(_currentFile))
             {
-                FileName = GetFileName(_currentFile),
                 VideoQuality = _videoWriterArgs.VideoQuality,
                 FrameRate = _videoWriterArgs.FrameRate,
-                ImageProvider = _videoWriterArgs.ImageProvider,
-                AudioProvider = _videoWriterArgs.AudioProvider,
                 AudioQuality = _videoWriterArgs.AudioQuality
             });
         }
@@ -145,7 +142,7 @@ namespace Captura.FFmpeg
 
         public void WriteAudio(byte[] Buffer, int Offset, int Length)
         {
-            IVideoFileWriter writer;
+            IVideoFileWriter? writer;
 
             lock (_syncLock)
             {

@@ -25,10 +25,10 @@ namespace Captura.Windows.DirectX
         public RenderTarget RenderTarget { get; private set; }
         public Texture2D PreviewTexture { get; private set; }
 
-        SolidColorBrush _solidColorBrush;
+        SolidColorBrush? _solidColorBrush;
         Factory1 _factory;
-        Factory _writeFactory;
-        ImagingFactory _imagingFactory;
+        Factory? _writeFactory;
+        ImagingFactory? _imagingFactory;
 
         public Factory WriteFactory => _writeFactory ??= new Factory();
 
@@ -146,31 +146,14 @@ namespace Captura.Windows.DirectX
             }
 
             _solidColorBrush?.Dispose();
-            _solidColorBrush = null;
-
             RenderTarget.Dispose();
-            RenderTarget = null;
-
             _factory.Dispose();
-            _factory = null;
-
             _writeFactory?.Dispose();
-            _writeFactory = null;
-
             _imagingFactory?.Dispose();
-            _imagingFactory = null;
-
             PreviewTexture.Dispose();
-            PreviewTexture = null;
-
             DesktopTexture.Dispose();
-            DesktopTexture = null;
-
             StagingTexture.Dispose();
-            StagingTexture = null;
-
             Device.Dispose();
-            Device = null;
         }
     }
 }

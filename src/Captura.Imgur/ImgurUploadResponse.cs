@@ -5,6 +5,6 @@ namespace Captura.Imgur
     class ImgurUploadResponse : ImgurResponse
     {
         [JsonProperty("data")]
-        public ImgurData Data { get; set; }
+        public ImgurData Data { get; set; } = default!;
     }
 }

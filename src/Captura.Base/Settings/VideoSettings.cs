@@ -1,4 +1,6 @@
-﻿namespace Captura.Video
+﻿using System;
+
+namespace Captura.Video
 {
     public class VideoSettings : PropertyStore
     {
@@ -8,10 +10,10 @@
             set => Set(value);
         }
         
-        public string Writer
+        public string? Writer
         {
             get => Get<string>();
-            set => Set(value);
+            set => Set(value ?? throw new ArgumentNullException());
         }
 
         public bool PostConvert
@@ -20,10 +22,10 @@
             set => Set(value);
         }
 
-        public string PostWriter
+        public string? PostWriter
         {
             get => Get<string>();
-            set => Set(value);
+            set => Set(value ?? throw new ArgumentNullException());
         }
         
         public string SourceKind
@@ -32,10 +34,10 @@
             set => Set(value);
         }
 
-        public string Source
+        public string? Source
         {
             get => Get<string>();
-            set => Set(value);
+            set => Set(value ?? throw new ArgumentNullException());
         }
 
         public string Webcam

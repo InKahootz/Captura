@@ -230,13 +230,8 @@ namespace Captura.Windows.MediaFoundation
                 _writer.Dispose();
 
                 _copyTexture.Dispose();
-                _copyTexture = null;
-
                 _sample.Dispose();
-                _sample = null;
-
                 _mediaBuffer.Dispose();
-                _mediaBuffer = null;
             }
         }
 

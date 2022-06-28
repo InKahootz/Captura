@@ -40,9 +40,8 @@ namespace Captura.Windows.DesktopDuplication
 
                 var rect = M.Description.DesktopBounds;
 
-                return new DeskDuplOutputEntry
+                return new DeskDuplOutputEntry(new DuplCapture(output1))
                 {
-                    DuplCapture = new DuplCapture(output1),
                     Location = new SharpDX.Point(rect.Left - bounds.Left, rect.Top - bounds.Top),
                     MousePointer = IncludeCursor ? new DxMousePointer(_editorSession) : null
                 };
@@ -72,7 +71,7 @@ namespace Captura.Windows.DesktopDuplication
                     }
 
                     return RepeatFrame.Instance;
-                }                
+                }
             }
 
             var editor = new Direct2DEditor(_editorSession);
@@ -91,17 +90,14 @@ namespace Captura.Windows.DesktopDuplication
             {
                 try { entry.DuplCapture.Dispose(); }
                 catch { }
-                finally { entry.DuplCapture = null; }
 
                 // Mouse Pointer disposed later to prevent errors.
                 try { entry.MousePointer?.Dispose(); }
                 catch { }
-                finally { entry.MousePointer = null; }
             }
 
             try { _editorSession.Dispose(); }
             catch { }
-            finally { _editorSession = null; }
         }
     }
 }

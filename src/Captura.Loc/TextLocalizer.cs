@@ -1,4 +1,6 @@
-﻿namespace Captura.Loc
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Captura.Loc
 {
     public class TextLocalizer : NotifyPropertyChanged
     {
@@ -14,6 +16,7 @@
         public string LocalizationKey
         {
             get => _key;
+            [MemberNotNull(nameof(_key))]
             set
             {
                 _key = value;

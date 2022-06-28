@@ -109,6 +109,6 @@ namespace Captura.Webcam
             }
         }
 
-        public event Action PreviewClicked;
+        public event Action? PreviewClicked;
     }
 }

@@ -98,7 +98,7 @@ namespace Captura.ViewModels
 
         void SelectOutputFolder()
         {
-            string currentFolder = null;
+            string? currentFolder = null;
 
             try
             {

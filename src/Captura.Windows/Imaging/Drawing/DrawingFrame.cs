@@ -9,7 +9,7 @@ namespace Captura.Windows.Gdi
 {
     public class DrawingFrame : IBitmapFrame
     {
-        public Bitmap Bitmap { get; }
+        public Bitmap? Bitmap { get; }
 
         public TimeSpan Timestamp { get; }
 
@@ -25,13 +25,18 @@ namespace Captura.Windows.Gdi
 
         public static IBitmapFrame DummyFrame { get; } = new DrawingFrame();
 
-        public void Dispose() => Bitmap.Dispose();
+        public void Dispose() => Bitmap?.Dispose();
 
         public int Width { get; }
         public int Height { get; }
 
         void Copy(Action<(IntPtr SrcPtr, int DestOffset, int Length)> Copier)
         {
+            if (Bitmap is null)
+            {
+                return;
+            }
+
             var bits = Bitmap.LockBits(new Rectangle(Point.Empty, Bitmap.Size), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
 
             try

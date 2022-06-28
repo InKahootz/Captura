@@ -12,9 +12,9 @@ namespace Captura.Video
             _disposeImages = DisposeImages;
         }
 
-        public abstract void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null);
+        public abstract void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null);
 
-        protected void Draw(IEditableFrame Editor, IBitmapImage Image, PointF Position, SizeF? Size, int Opacity)
+        protected void Draw(IEditableFrame Editor, IBitmapImage? Image, PointF Position, SizeF? Size, int Opacity)
         {
             if (Image == null)
                 return;

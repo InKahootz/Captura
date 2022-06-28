@@ -27,7 +27,7 @@ namespace Captura.MouseKeyHook
 
         public void Dispose() { }
 
-        public void Draw(IEditableFrame Editor, Func<Point, Point> PointTransform = null)
+        public void Draw(IEditableFrame Editor, Func<Point, Point>? PointTransform = null)
         {
             if (!_settings.Display)
                 return;
@@ -146,7 +146,7 @@ namespace Captura.MouseKeyHook
             }
         }
 
-        void OnKeyUp(object Sender, KeyEventArgs Args)
+        void OnKeyUp(object? Sender, KeyEventArgs Args)
         {
             if (!_settings.Display)
             {
@@ -178,7 +178,7 @@ namespace Captura.MouseKeyHook
             }
         }
 
-        void OnKeyDown(object Sender, KeyEventArgs Args)
+        void OnKeyDown(object? Sender, KeyEventArgs Args)
         {
             if (!_settings.Display)
             {

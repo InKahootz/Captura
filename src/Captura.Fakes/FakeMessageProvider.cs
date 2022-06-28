@@ -5,7 +5,7 @@ namespace Captura.Fakes
 {
     class FakeMessageProvider : IMessageProvider
     {
-        public void ShowError(string Message, string Header = null)
+        public void ShowError(string Message, string? Header = null)
         {
             if (Header != null)
                 Console.WriteLine(Header);
