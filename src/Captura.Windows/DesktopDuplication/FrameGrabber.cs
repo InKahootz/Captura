@@ -1,111 +1,94 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+
+using Nito.AsyncEx;
+
 using SharpDX;
 using SharpDX.DXGI;
 
+#nullable enable
 namespace Captura.Windows.DesktopDuplication
 {
     public class FrameGrabber : IDisposable
     {
-        readonly OutputDuplication _deskDupl;
+        private readonly OutputDuplication _deskDupl;
+        private readonly Task _acquireTask;
+        private readonly CancellationTokenSource _cts;
+        private readonly AsyncManualResetEvent _pulse;
+        private AcquireResult? _acquireResult;
+        private bool _disposedValue;
 
-        AcquireResult _acquireResult;
-        readonly object _acquireResultLock = new object(),
-            _acquireTaskLock = new object();
-
-        Task _acquireTask;
-
-        public FrameGrabber(OutputDuplication DeskDupl)
+        public FrameGrabber(OutputDuplication deskDupl)
         {
-            _deskDupl = DeskDupl;
+            _deskDupl = deskDupl;
+
+            _pulse = new AsyncManualResetEvent(false);
+            _cts = new CancellationTokenSource();
+            _acquireTask = Task.Run(async () => await AcquireResultAsync(_cts.Token), _cts.Token);
         }
 
-        void BeginAcquireFrame()
+        private async Task AcquireResultAsync(CancellationToken token = default)
         {
-            const int timeout = 50;
-
-            _acquireTask = Task.Run(() =>
+            const int TimeoutInMilliseconds = 50;
+            while (!token.IsCancellationRequested)
             {
                 try
                 {
-                    var result = _deskDupl.TryAcquireNextFrame(timeout, out var frameInfo, out var desktopResource);
+                    Result result = _deskDupl.TryAcquireNextFrame(TimeoutInMilliseconds,
+                        out OutputDuplicateFrameInformation frameInfo,
+                        out Resource? desktopResource);
 
                     if (result == ResultCode.WaitTimeout)
                     {
-                        lock (_acquireResultLock)
-                        {
-                            _acquireResult = null;
-                        }
-
-                        BeginAcquireFrame();
+                        Interlocked.Exchange(ref _acquireResult, null);
                     }
                     else
                     {
-                        lock (_acquireResultLock)
-                        {
-                            _acquireResult = new AcquireResult(result, frameInfo, desktopResource);
-                        }
+                        var acquireResult = new AcquireResult(result, frameInfo, desktopResource);
+                        Interlocked.Exchange(ref _acquireResult, acquireResult);
+                        _pulse.Reset();
                     }
                 }
                 catch
                 {
-                    lock (_acquireResultLock)
-                    {
-                        _acquireResult = new AcquireResult(Result.Fail);
-                    }
-                }
-            });
-        }
-
-        AcquireResult GetAcquireResult()
-        {
-            lock (_acquireTaskLock)
-            {
-                if (_acquireTask == null)
-                {
-                    BeginAcquireFrame();
-
-                    return null;
+                    Interlocked.Exchange(ref _acquireResult, new AcquireResult(Result.Fail));
                 }
 
-                _acquireTask.Wait();
-            }
-
-            lock (_acquireResultLock)
-            {
-                var val = _acquireResult;
-
-                _acquireResult = null;
-
-                return val;
+                await _pulse.WaitAsync(token);
             }
         }
 
-        public AcquireResult Grab()
+        public AcquireResult? Grab()
         {
-            return GetAcquireResult();
+            AcquireResult? result = Interlocked.Exchange(ref _acquireResult, null);
+            return result;
         }
 
         public void Release()
         {
-            lock (_acquireTaskLock)
-            {
-                _deskDupl.ReleaseFrame();
+            _deskDupl.ReleaseFrame();
+            _pulse.Set();
+        }
 
-                BeginAcquireFrame();
+        #region IDisposable
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                _disposedValue = true;
+
+                _cts.Cancel();
+                _acquireTask.Wait();
             }
         }
 
         public void Dispose()
         {
-            lock (_acquireTaskLock)
-            {
-                try
-                {
-                    _acquireTask?.Wait();
-                }
-                catch { }
-            }
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }
