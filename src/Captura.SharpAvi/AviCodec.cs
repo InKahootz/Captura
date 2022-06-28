@@ -7,16 +7,14 @@ namespace Captura.SharpAvi
     /// </summary>
     class AviCodec
     {
-        // ReSharper disable once InconsistentNaming
-        internal FourCC FourCC { get; }
+            internal FourCC FourCC { get; }
 
         /// <summary>
         /// Name of the Codec
         /// </summary>
         public string Name { get; }
 
-        // ReSharper disable once InconsistentNaming
-        internal AviCodec(FourCC FourCC, string Name)
+            internal AviCodec(FourCC FourCC, string Name)
         {
             this.FourCC = FourCC;
             this.Name = Name;

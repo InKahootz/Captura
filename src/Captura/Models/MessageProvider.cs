@@ -9,7 +9,6 @@ using FirstFloor.ModernUI.Windows.Controls;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class MessageProvider : IMessageProvider
     {
         readonly IAudioPlayer _audioPlayer;

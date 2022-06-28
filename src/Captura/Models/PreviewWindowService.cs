@@ -8,7 +8,6 @@ using SharpDX.Direct3D9;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class PreviewWindowService : IPreviewWindow
     {
         D3D9PreviewAssister _d3D9PreviewAssister;

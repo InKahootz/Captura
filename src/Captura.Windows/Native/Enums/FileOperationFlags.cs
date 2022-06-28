@@ -48,8 +48,7 @@ namespace Captura.Native
         /// <summary>
         /// Don't put up error UI
         /// </summary>
-        // ReSharper disable once InconsistentNaming
-        NoErrorUI = 0x400,
+            NoErrorUI = 0x400,
         
         /// <summary>
         /// Dont copy NT file Security Attributes

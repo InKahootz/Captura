@@ -4,7 +4,6 @@ using Captura.FFmpeg;
 
 namespace Captura.Fakes
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FakeFFmpegLogRepository : IFFmpegLogRepository
     {
         public IEnumerator<IFFmpegLogEntry> GetEnumerator()

@@ -4,7 +4,6 @@ using Captura.Video;
 
 namespace Captura.Fakes
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class FakeVideoSourcePicker : IVideoSourcePicker
     {
         FakeVideoSourcePicker() { }

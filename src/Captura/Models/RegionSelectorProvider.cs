@@ -5,7 +5,6 @@ using Captura.ViewModels;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class RegionSelectorProvider : IRegionProvider
     {
         readonly Lazy<RegionSelector> _regionSelector;

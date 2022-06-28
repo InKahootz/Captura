@@ -4,7 +4,6 @@ using System.Windows.Media;
 
 namespace Captura.Audio
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class AudioPlayer : IAudioPlayer
     {
         readonly SoundSettings _settings;

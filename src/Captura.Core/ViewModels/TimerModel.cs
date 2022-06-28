@@ -4,7 +4,6 @@ using Captura.Models;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class TimerModel : NotifyPropertyChanged
     {
         readonly Settings _settings;

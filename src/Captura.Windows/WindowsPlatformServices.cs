@@ -10,7 +10,6 @@ using SharpDX.DXGI;
 
 namespace Captura.Windows
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class WindowsPlatformServices : IPlatformServices
     {
         readonly IPreviewWindow _previewWindow;

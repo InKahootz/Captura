@@ -5,7 +5,6 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace Captura.Tests.Views
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class AppRunnerFixture : IDisposable
     {
         public Application App { get; }

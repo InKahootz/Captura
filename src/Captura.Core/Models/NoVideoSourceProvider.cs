@@ -5,7 +5,6 @@ using Captura.Loc;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class NoVideoSourceProvider : VideoSourceProviderBase
     {
         public NoVideoSourceProvider(ILocalizationProvider Loc,

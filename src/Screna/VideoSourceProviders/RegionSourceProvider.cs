@@ -3,7 +3,6 @@ using Captura.Loc;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class RegionSourceProvider : VideoSourceProviderBase
     {
         readonly IRegionProvider _regionProvider;

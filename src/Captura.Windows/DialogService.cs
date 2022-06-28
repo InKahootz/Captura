@@ -4,7 +4,6 @@ using Ookii.Dialogs.WinForms;
 
 namespace Captura.Windows
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class DialogService : IDialogService
     {
         public string PickFolder(string Current, string Description)

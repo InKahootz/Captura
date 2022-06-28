@@ -15,7 +15,6 @@ using Microsoft.Win32;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class RecordingModel : ViewModelBase, IDisposable
     {
         #region Fields

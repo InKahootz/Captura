@@ -15,8 +15,7 @@ namespace Captura.Hotkeys
         }
 
         // Default constructor required by Settings
-        // ReSharper disable once UnusedMember.Global
-        public HotkeyModel() { }
+            public HotkeyModel() { }
 
         public bool IsActive { get; set; }
 

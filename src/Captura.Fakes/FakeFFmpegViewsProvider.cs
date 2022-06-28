@@ -3,7 +3,6 @@ using Captura.FFmpeg;
 
 namespace Captura.Fakes
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class FakeFFmpegViewsProvider : IFFmpegViewsProvider
     {
         public void ShowLogs()

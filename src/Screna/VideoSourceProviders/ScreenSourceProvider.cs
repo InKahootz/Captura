@@ -4,7 +4,6 @@ using Captura.Loc;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class ScreenSourceProvider : VideoSourceProviderBase
     {
         readonly IVideoSourcePicker _videoSourcePicker;

@@ -3,7 +3,6 @@ using Captura.Loc;
 
 namespace Captura.Models
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class ClipboardWriter : NotifyPropertyChanged, IImageWriterItem
     {
         readonly ISystemTray _systemTray;

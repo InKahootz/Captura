@@ -4,7 +4,6 @@ using Captura.Video;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class HotkeyActor : IHotkeyActor
     {
         readonly ScreenShotViewModel _screenShotViewModel;

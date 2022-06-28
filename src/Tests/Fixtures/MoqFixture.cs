@@ -5,7 +5,6 @@ using Moq;
 
 namespace Captura.Tests
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class MoqFixture : IDisposable
     {
         public void Dispose() { }

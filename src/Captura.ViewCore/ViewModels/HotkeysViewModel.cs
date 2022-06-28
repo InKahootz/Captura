@@ -5,7 +5,6 @@ using Reactive.Bindings;
 
 namespace Captura.ViewModels
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class HotkeysViewModel
     {
         public ReadOnlyObservableCollection<Hotkey> Hotkeys { get; }

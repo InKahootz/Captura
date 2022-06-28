@@ -3,7 +3,6 @@ using Captura.ViewModels;
 
 namespace Captura
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class MainWindowHelper
     {
         public MainWindowHelper(MainViewModel MainViewModel,

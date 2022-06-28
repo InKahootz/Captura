@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 
 namespace Captura.Hotkeys
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class HotKeyManager : IDisposable
     {
         readonly ObservableCollection<Hotkey> _hotkeys = new ObservableCollection<Hotkey>();

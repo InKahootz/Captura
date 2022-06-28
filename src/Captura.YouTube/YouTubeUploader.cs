@@ -8,7 +8,6 @@ using Google.Apis.YouTube.v3.Data;
 
 namespace Captura.YouTube
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class YouTubeUploader
     {
         readonly IYouTubeApiKeys _apiKeys;

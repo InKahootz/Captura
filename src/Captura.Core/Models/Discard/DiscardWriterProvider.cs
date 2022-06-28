@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Captura.Video
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class DiscardWriterProvider : IVideoWriterProvider
     {
         readonly IPreviewWindow _previewWindow;

@@ -3,7 +3,6 @@ using Captura.Models;
 
 namespace Captura.Fakes
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class FakeMessageProvider : IMessageProvider
     {
         public void ShowError(string Message, string Header = null)

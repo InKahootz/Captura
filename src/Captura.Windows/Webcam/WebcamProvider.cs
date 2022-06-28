@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Captura.Webcam
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     class WebcamProvider : NotifyPropertyChanged, IWebCamProvider
     {
         public IEnumerable<IWebcamItem> GetSources()

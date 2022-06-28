@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 
 namespace Captura.Imgur
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class ImgurUploader : IImageUploader
     {
         readonly ImgurSettings _settings;

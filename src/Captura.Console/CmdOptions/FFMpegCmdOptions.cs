@@ -3,7 +3,6 @@
 namespace Captura
 {
     [Verb("ffmpeg", HelpText = "Manage FFmpeg")]
-    // ReSharper disable once ClassNeverInstantiated.Global
     class FFmpegCmdOptions : ICmdlineVerb
     {
         [Option("install", HelpText = "Install FFmpeg to specified folder.")]

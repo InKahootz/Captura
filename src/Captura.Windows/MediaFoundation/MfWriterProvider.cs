@@ -7,7 +7,6 @@ using SharpDX.Direct3D11;
 
 namespace Captura.Windows.MediaFoundation
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class MfWriterProvider : IVideoWriterProvider
     {
         readonly Device _device;

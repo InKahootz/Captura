@@ -7,7 +7,6 @@ using static System.Console;
 
 namespace Captura
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class ConsoleLister
     {
         static readonly string Underline = $"\n{new string('-', 30)}";
